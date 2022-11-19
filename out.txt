@@ -1,0 +1,977 @@
+[1;97mRunning test: [0m[37mmain_tests/9_examples/0.mhs[0m[1;97m (worth 8) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Con "Pair") (Num 1)) (App (App (Con "Pair") (App (Con "Inl") (Con "True"))) (Con "False")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/9_examples/1.mhs[0m[1;97m (worth 8) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Con "Inl") (App (Con "Inl") (Con "True")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/9_examples/3.mhs[0m[1;97m (worth 8) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Case (App (Con "Inl") (Num 1)) [Alt "Inl" ["x"] (App (App (Prim Add) (Var "x")) (Num 1)),Alt "Inr" ["y"] (Var "y")])]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/9_examples/2.mhs[0m[1;97m (worth 8) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (Con "True") (App (Con "Inl") (Num 1)) (App (Con "Inr") (Con "False")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/9_examples/6.mhs[0m[1;97m (worth 8) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Recfun (Bind "f" Nothing ["x"] (Var "x"))) (Num 1))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/9_examples/5.mhs[0m[1;97m (worth 8) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Num 1)] (Let [Bind "y" Nothing [] (Num 2)] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["z"] (Var "z")))] (If (App (Var "f") (Con "True")) (App (Con "Inl") (App (App (Prim Add) (Var "x")) (Var "y"))) (App (Con "Inr") (Var "x"))))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/9_examples/4.mhs[0m[1;97m (worth 8) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Num 5)] (Var "x"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/3_variables/000.mhs[0m[1;97m (worth 3) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Num 1)] (Var "x"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/3_variables/001.mhs[0m[1;97m (worth 3) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "t" Nothing [] (Con "True")] (Var "t"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/3_variables/002.mhs[0m[1;97m (worth 3) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "v" Nothing [] (App (App (Prim Sub) (Num 1)) (Num 2))] (Var "v"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/006.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Prim Snd) (App (App (Con "Pair") (Con "()")) (App (Prim Fst) (App (App (Con "Pair") (App (App (Con "Pair") (Num 7)) (Con "True"))) (Con "()")))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/007.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Prim Fst) (App (App (Con "Pair") (If (Con "True") (Num 1) (Num 2))) (Con "()")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/005.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Prim Fst) (App (App (Con "Pair") (Num 1)) (App (Prim Fst) (App (App (Con "Pair") (Con "True")) (Con "False")))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/004.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Con "Pair") (Con "()")) (App (App (Con "Pair") (Con "()")) (Con "()")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/000.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Con "Pair") (Num 1)) (App (App (Con "Pair") (App (App (Con "Pair") (Num 1)) (Num 2))) (Con "True")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/001.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Prim Fst) (App (App (Con "Pair") (Num 1)) (Num 2)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/003.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Prim Fst) (App (App (Con "Pair") (Con "()")) (Con "True")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/002.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Prim Snd) (App (App (Con "Pair") (Num 1)) (Con "True")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/008.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "y" Nothing [] (Num 1)] (Let [Bind "x" Nothing [] (Con "True")] (App (App (Con "Pair") (App (App (Prim Mul) (Var "y")) (Var "y"))) (Var "x"))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/1_two_tuple/001.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Con "Pair") (Con "True")) (Con "False"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/1_two_tuple/003.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Con "Pair") (Con "()")) (Con "()"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/1_two_tuple/002.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Con "Pair") (Num 1)) (Num 2))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/0_zero_tuple/0.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Con "()")]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/0_zero_tuple/1.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (Con "True") (Con "()") (Con "()"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/2_mixed_two_tuple/000.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Con "Pair") (Num 1)) (Con "True"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/2_mixed_two_tuple/001.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Con "Pair") (Num 7)) (Con "()"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/2_mixed_two_tuple/002.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Con "Pair") (Con "True")) (Num 7))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/006.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Quot) (App (Prim Neg) (Num 2))) (Num 2))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/007.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Le) (App (App (Prim Add) (App (App (Prim Sub) (App (App (Prim Add) (Num 1)) (Num 1))) (App (App (Prim Quot) (App (App (Prim Mul) (Num 1)) (Num 1))) (Num 1)))) (Num 1))) (App (App (Prim Sub) (App (App (Prim Add) (App (App (Prim Sub) (App (App (Prim Add) (Num 2)) (Num 2))) (Num 2))) (App (App (Prim Mul) (App (App (Prim Quot) (Num 2)) (Num 2))) (Num 2)))) (Num 2)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/005.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Sub) (App (App (Prim Add) (App (App (Prim Sub) (App (App (Prim Sub) (App (App (Prim Sub) (App (App (Prim Add) (App (App (Prim Sub) (App (App (Prim Add) (App (App (Prim Sub) (Num 123)) (Num 123))) (Num 123))) (Num 123))) (Num 123))) (App (App (Prim Quot) (Num 23)) (Num 10)))) (Num 5))) (Num 1))) (App (App (Prim Quot) (Num 1)) (Num 2)))) (Num 1))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/004.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Sub) (App (App (Prim Add) (Num 1)) (Num 2))) (App (App (Prim Quot) (App (App (Prim Mul) (Num 3)) (Num 4))) (Num 5)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/000.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Add) (App (App (Prim Add) (Num 1)) (Num 2))) (Num 3))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/001.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Mul) (Num 1)) (App (Prim Neg) (Num 1)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/003.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Add) (Num 1)) (App (App (Prim Mul) (Num 2)) (Num 3)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/002.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Add) (Num 1)) (App (App (Prim Mul) (Num 2)) (Num 3)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/008.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Prim Neg) (App (Prim Neg) (App (Prim Neg) (App (Prim Neg) (App (Prim Neg) (App (Prim Neg) (App (Prim Neg) (App (Prim Neg) (App (Prim Neg) (App (Prim Neg) (Num 1)))))))))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/006.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Ge) (Num 2)) (Num 2))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/007.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Lt) (Num 0)) (Num 2))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/011.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Sub) (Num 0)) (Num 17))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/005.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Gt) (Num 1)) (Num 2))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/004.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Quot) (Num 5)) (Num 2))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/010.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Ne) (Num 42)) (Num 42))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/014.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Num 8796093022207)]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/000.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Add) (Num 1)) (Num 2))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/001.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Sub) (Num 2)) (Num 1))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/003.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Quot) (Num 10)) (Num 2))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/002.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Mul) (Num 2)) (Num 2))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/009.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Eq) (Num 17)) (Num 17))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/008.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Le) (Num 0)) (Num 0))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/dividebyzero/000.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Quot) (Num 1)) (Num 0))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/unarynegate/000.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Prim Neg) (Num 17))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/0_basics/bools/000.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Con "True")]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/0_basics/bools/001.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Con "False")]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/0_basics/ints/000.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Num 0)]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/0_basics/ints/001.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Num 1)]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/0_basics/ints/003.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Num 42)]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/0_basics/main/main.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Num 0)]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/006.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (App (App (Prim Lt) (Num 0)) (Num 1)) (Con "True") (Con "False"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/007.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Num 1)] (If (App (App (Prim Lt) (Var "x")) (Num 2)) (Con "True") (Con "False")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/005.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (Con "False") (App (App (Prim Quot) (Num 49)) (Num 0)) (App (App (Prim Quot) (Num 49)) (Num 7)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/004.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (App (App (Prim Eq) (App (App (Prim Add) (Num 1)) (Num 2))) (App (App (Prim Sub) (Num 4)) (Num 1))) (App (App (Prim Add) (Num 0)) (Num 1)) (App (App (Prim Sub) (Num 1)) (Num 0)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/000.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (Con "True") (Num 1) (Num 0))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/001.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (Con "False") (Num 1) (Num 0))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/003.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (App (App (Prim Eq) (Num 1)) (Num 1)) (Con "True") (Con "False"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/002.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (Con "True") (Con "True") (Con "False"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/6_programs/test.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (App (App (Prim Lt) (Num 0)) (Num 10)) (Con "True") (App (Var "f") (App (App (Prim Sub) (Var "x")) (Num 1))))))] (App (Var "f") (Num 16)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/2_application/004.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (App (Prim Add) (Var "x")) (Num 1))))] (Let [Bind "g" Nothing [] (Var "f")] (App (Var "g") (Num 1))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/2_application/000.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "isTrue" Nothing [] (Recfun (Bind "isTrue" Nothing ["x"] (If (Var "x") (Con "True") (Con "False"))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (App (Prim Eq) (Var "x")) (Num 10))))] (App (Var "isTrue") (App (Var "f") (Num 11)))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/2_application/001.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (App (Prim Mul) (Num 2)) (Var "x"))))] (Let [Bind "g" Nothing [] (Recfun (Bind "g" Nothing ["x"] (App (Prim Neg) (Var "x"))))] (App (Var "g") (App (Var "f") (Num 2)))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/2_application/002.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "g" Nothing [] (Recfun (Bind "g'" Nothing ["x"] (App (App (Prim Mul) (Var "x")) (Var "x"))))] (Let [Bind "f" Nothing [] (Var "g")] (App (Var "g") (Num 7))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/4_partial_application/005.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "g" Nothing ["y"] (App (App (Prim Mul) (Var "x")) (App (Prim Neg) (Var "y")))))))] (Let [Bind "z" Nothing [] (Recfun (Bind "z" Nothing ["x"] (App (Var "f") (Num 3))))] (App (App (Var "z") (Num 2)) (Num 4))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/4_partial_application/000.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "g" Nothing ["y"] (App (App (Prim Add) (Var "x")) (Var "y"))))))] (App (App (Var "f") (Num 1)) (Num 2)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/4_partial_application/003.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "g" Nothing ["y"] (Var "x")))))] (Let [Bind "g" Nothing [] (App (Var "f") (Num 10))] (App (Var "g") (Num 3))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/4_partial_application/002.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "g" Nothing ["y"] (App (App (Prim Add) (Var "y")) (Var "y"))))))] (App (App (Var "f") (Num 2)) (Num 3)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/4_partial_application/008.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Num 8)] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["w"] (Recfun (Bind "g" Nothing ["y"] (App (App (Prim Add) (App (App (Prim Add) (App (App (Prim Add) (Var "y")) (Var "x"))) (Var "w"))) (Num 1))))))] (App (App (Var "f") (Num 3)) (Num 2))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/006.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "plus" Nothing [] (Recfun (Bind "g" Nothing ["x"] (Recfun (Bind "g'" Nothing ["y"] (App (App (Prim Add) (Var "x")) (Var "y"))))))] (Let [Bind "inc" Nothing [] (Recfun (Bind "g" Nothing ["x"] (App (App (Prim Add) (Var "x")) (Num 1))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (App (App (Prim Eq) (Var "x")) (Num 10)) (Num 10) (Let [Bind "y" Nothing [] (App (Var "f") (App (App (Prim Add) (Var "x")) (Num 1)))] (App (App (Var "plus") (Let [Bind "z" Nothing [] (Num 4)] (App (Var "inc") (Var "z")))) (Var "y"))))))] (App (Var "f") (App (Prim Neg) (Num 1003))))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/005.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "a" Nothing [] (Num 1)] (Let [Bind "b" Nothing [] (Num 2)] (Let [Bind "c" Nothing [] (Num 3)] (Let [Bind "d" Nothing [] (Num 4)] (Let [Bind "e" Nothing [] (Num 5)] (Let [Bind "f" Nothing [] (Num 6)] (Let [Bind "g" Nothing [] (Num 7)] (Let [Bind "h" Nothing [] (Num 8)] (Let [Bind "i" Nothing [] (Num 9)] (Let [Bind "j" Nothing [] (Num 10)] (Let [Bind "k" Nothing [] (Num 11)] (Let [Bind "l" Nothing [] (Num 12)] (Let [Bind "m" Nothing [] (Num 13)] (Let [Bind "n" Nothing [] (Num 14)] (Let [Bind "o" Nothing [] (Num 15)] (Let [Bind "p" Nothing [] (Num 16)] (Let [Bind "q" Nothing [] (Num 17)] (Let [Bind "r" Nothing [] (Num 18)] (Let [Bind "s" Nothing [] (Num 19)] (Let [Bind "t" Nothing [] (Num 20)] (Let [Bind "u" Nothing [] (Num 21)] (Let [Bind "v" Nothing [] (Num 22)] (Let [Bind "w" Nothing [] (Num 23)] (Let [Bind "x" Nothing [] (Num 24)] (Let [Bind "y" Nothing [] (Num 25)] (Let [Bind "z" Nothing [] (Num 26)] (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (App (App (Prim Mul) (Var "a")) (Var "b"))) (Var "c"))) (Var "d"))) (Var "e"))) (Var "f"))) (Var "g"))) (Var "h"))) (Var "i"))) (Var "j"))) (Var "k"))) (Var "l"))) (Var "m"))) (Var "n"))) (Var "o"))) (Var "p"))) (Var "q"))) (Var "r"))) (Var "s"))) (Var "t"))) (Var "u"))) (Var "v"))) (Var "w"))) (Var "x"))) (Var "y"))) (Var "z"))))))))))))))))))))))))))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/004.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "a" Nothing [] (Num 0)] (Let [Bind "b" Nothing [] (Num 2)] (Let [Bind "c" Nothing [] (Num 3)] (Let [Bind "d" Nothing [] (Num 4)] (Let [Bind "e" Nothing [] (Num 5)] (Let [Bind "f" Nothing [] (Num 6)] (Let [Bind "g" Nothing [] (Num 7)] (Let [Bind "h" Nothing [] (Num 8)] (Let [Bind "i" Nothing [] (Num 9)] (Let [Bind "j" Nothing [] (Num 10)] (Let [Bind "k" Nothing [] (Num 11)] (Let [Bind "l" Nothing [] (Num 12)] (Let [Bind "m" Nothing [] (Num 13)] (Let [Bind "n" Nothing [] (Num 14)] (Let [Bind "o" Nothing [] (Num 15)] (Let [Bind "p" Nothing [] (Num 16)] (Let [Bind "q" Nothing [] (Num 17)] (Let [Bind "r" Nothing [] (Num 18)] (Let [Bind "s" Nothing [] (Num 19)] (Let [Bind "t" Nothing [] (Num 20)] (Let [Bind "u" Nothing [] (Num 21)] (Let [Bind "v" Nothing [] (Num 22)] (Let [Bind "w" Nothing [] (Num 23)] (Let [Bind "x" Nothing [] (Num 24)] (Let [Bind "y" Nothing [] (Num 25)] (Let [Bind "z" Nothing [] (Num 26)] (Let [Bind "za" Nothing [] (Num 26)] (Let [Bind "zb" Nothing [] (Num 27)] (Let [Bind "z1" Nothing [] (Num 1)] (Let [Bind "z2" Nothing [] (Num 2)] (Let [Bind "z3" Nothing [] (Num 3)] (Let [Bind "z4" Nothing [] (Num 4)] (Let [Bind "z5" Nothing [] (Num 5)] (Let [Bind "z6" Nothing [] (Num 6)] (Let [Bind "z7" Nothing [] (Num 7)] (Let [Bind "z8" Nothing [] (Num 8)] (Let [Bind "z9" Nothing [] (Num 9)] (Let [Bind "z10" Nothing [] (Num 10)] (Let [Bind "z11" Nothing [] (Num 11)] (Let [Bind "z12" Nothing [] (Num 12)] (Let [Bind "z13" Nothing [] (Num 13)] (Let [Bind "z14" Nothing [] (Num 14)] (Let [Bind "z15" Nothing [] (Num 15)] (Let [Bind "z16" Nothing [] (Num 16)] (Let [Bind "z17" Nothing [] (Num 17)] (Let [Bind "z18" Nothing [] (Num 18)] (Let [Bind "z19" Nothing [] (Num 19)] (Let [Bind "z20" Nothing [] (Num 20)] (Let [Bind "z21" Nothing [] (Num 21)] (Let [Bind "z22" Nothing [] (Num 22)] (Let [Bind "z23" Nothing [] (Num 23)] (Let [Bind "z24" Nothing [] (Num 24)] (Let [Bind "z25" Nothing [] (Num 25)] (Let [Bind "z26" Nothing [] (Num 26)] (Let [Bind "z27" Nothing [] (Num 27)] (Let [Bind "z28" Nothing [] (Num 28)] (Let [Bind "z29" Nothing [] (Num 29)] (Let [Bind "z30" Nothing [] (Num 30)] (Let [Bind "z31" Nothing [] (Num 31)] (Let [Bind "z32" Nothing [] (Num 32)] (Let [Bind "z33" Nothing [] (Num 33)] (Let [Bind "z34" Nothing [] (Num 34)] (Let [Bind "z35" Nothing [] (Num 35)] (Let [Bind "z36" Nothing [] (Num 36)] (Let [Bind "z37" Nothing [] (Num 37)] (Let [Bind "z38" Nothing [] (Num 38)] (Let [Bind "z39" Nothing [] (Num 39)] (Let [Bind "z40" Nothing [] (Num 40)] (Let [Bind "z41" Nothing [] (Num 41)] (Let [Bind "z42" Nothing [] (Num 42)] (Let [Bind "z43" Nothing [] (Num 43)] (Let [Bind "z44" Nothing [] (Num 44)] (Let [Bind "z45" Nothing [] (Num 45)] (Let [Bind "z46" Nothing [] (Num 46)] (Let [Bind "z47" Nothing [] (Num 47)] (Let [Bind "z48" Nothing [] (Num 48)] (Let [Bind "z49" Nothing [] (Num 49)] (Let [Bind "z50" Nothing [] (Num 50)] (Let [Bind "z51" Nothing [] (Num 51)] (Let [Bind "z52" Nothing [] (Num 52)] (Let [Bind "z53" Nothing [] (Num 53)] (Let [Bind "z54" Nothing [] (Num 54)] (Let [Bind "z55" Nothing [] (Num 55)] (Let [Bind "z56" Nothing [] (Num 56)] (Let [Bind "z57" Nothing [] (Num 57)] (Let [Bind "z58" Nothing [] (Num 58)] (Let [Bind "z59" Nothing [] (Num 59)] (Let [Bind "z60" Nothing [] (Num 60)] (Let [Bind "z61" Nothing [] (Num 61)] (Let [Bind "z62" Nothing [] (Num 62)] (Let [Bind "z63" Nothing [] (Num 63)] (Let [Bind "z64" Nothing [] (Num 64)] (Let [Bind "z65" Nothing [] (Num 65)] (Let [Bind "z66" Nothing [] (Num 66)] (Let [Bind "z67" Nothing [] (Num 67)] (Let [Bind "z68" Nothing [] (Num 68)] (Var "a")))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/000.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Con "True")] (Var "x"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/001.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "i" Nothing [] (Num 1)] (App (App (Prim Add) (Var "i")) (Var "i")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/003.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "a" Nothing [] (Con "True")] (Let [Bind "b" Nothing [] (Con "False")] (If (App (App (Prim Lt) (Num 1)) (Num 2)) (Var "a") (Var "b"))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/002.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Num 1)] (Let [Bind "y" Nothing [] (Num 2)] (App (App (Prim Add) (Var "x")) (Var "y"))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/006.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Recfun (Bind "f" Nothing ["x"] (App (App (Prim Add) (Var "x")) (Var "x")))) (Num 1))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/007.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "g" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (App (Prim Add) (Var "x")) (Var "x"))))] (App (Var "g") (Num 1)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/005.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "f" Nothing ["x"] (App (App (Prim Mul) (Num 2)) (Var "x"))))))))))))] (App (App (App (App (App (Var "f") (Num 0)) (Num 0)) (Num 0)) (Num 0)) (Num 7)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/004.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (Prim Neg) (Num 1))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (Prim Neg) (Num 2))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (Prim Neg) (Num 3))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (Prim Neg) (Num 4))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (Prim Neg) (Num 5))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (Prim Neg) (Num 6))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (Prim Neg) (Num 7))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (Prim Neg) (Num 8))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (Prim Neg) (Num 9))))] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Con "True")))] (App (Var "f") (Num 7))))))))))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/000.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (App (Prim Add) (Var "x")) (Var "x"))))] (App (Var "f") (Num 1)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/001.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "lt0" Nothing [] (Recfun (Bind "lt0" Nothing ["x"] (If (App (App (Prim Lt) (Var "x")) (Num 0)) (Con "True") (Con "False"))))] (Let [Bind "gt1" Nothing [] (Recfun (Bind "gt1" Nothing ["x"] (App (App (Prim Gt) (Var "x")) (Num 1))))] (If (App (Var "lt0") (App (Prim Neg) (Num 10))) (If (App (Var "gt1") (Num 0)) (Con "False") (Con "True")) (Con "False"))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/002.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Num 2)] (Let [Bind "square" Nothing [] (Recfun (Bind "square" Nothing ["x"] (App (App (Prim Mul) (Var "x")) (Var "x"))))] (App (Var "square") (App (Var "square") (Var "x")))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/008.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "g" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (Con "True") (Let [Bind "h" Nothing [] (Recfun (Bind "g" Nothing ["y"] (Var "x")))] (Var "h")) (Let [Bind "h" Nothing [] (Recfun (Bind "g" Nothing ["y"] (App (App (Prim Add) (Var "x")) (Num 1))))] (Var "h")))))] (Var "g"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/3_recursion/005.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (App (App (Prim Eq) (Var "x")) (Num 1000)) (Var "x") (App (Var "f") (App (App (Prim Add) (Var "x")) (Num 1))))))] (App (Var "f") (Num 10)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/3_recursion/000.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (App (App (Prim Eq) (Var "x")) (Num 100)) (Var "x") (App (Var "f") (App (App (Prim Add) (Var "x")) (Num 1))))))] (App (Var "f") (Num 10)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/3_recursion/001.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "g" Nothing ["y"] (If (App (App (Prim Eq) (Var "x")) (Num 10)) (Var "y") (App (App (Var "f") (App (App (Prim Add) (Var "x")) (Num 1))) (App (App (Prim Add) (Var "y")) (Num 2)))))))) (Num 0)) (Num 2))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/3_recursion/002.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "fib" Nothing [] (Recfun (Bind "fib" Nothing ["n"] (If (App (App (Prim Eq) (Var "n")) (Num 0)) (Num 0) (If (App (App (Prim Eq) (Var "n")) (Num 1)) (Num 1) (App (App (Prim Add) (App (Var "fib") (App (App (Prim Sub) (Var "n")) (Num 2)))) (App (Var "fib") (App (App (Prim Sub) (Var "n")) (Num 1))))))))] (Let [Bind "n" Nothing [] (Num 25)] (App (Var "fib") (Var "n"))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/3_recursion/fac.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Recfun (Bind "fac" Nothing ["n"] (If (App (App (Prim Eq) (Var "n")) (Num 0)) (Num 1) (App (App (Prim Mul) (Var "n")) (App (Var "fac") (App (App (Prim Sub) (Var "n")) (Num 1))))))) (Num 14))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/8_sums/1_right/001.mhs[0m[1;97m (worth 2) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Con "Inr") (App (App (Con "Pair") (Con "True")) (Con "False")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/8_sums/1_right/003.mhs[0m[1;97m (worth 2) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Con "Pair") (Con "()")) (App (Con "Inr") (Con "()")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/8_sums/1_right/002.mhs[0m[1;97m (worth 2) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Con "Inr") (App (App (Con "Pair") (App (Con "Inr") (Num 1))) (App (Con "Inr") (Con "()"))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/8_sums/2_case/000.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Case (App (Con "Inl") (App (App (Con "Pair") (Num 1)) (Con "True"))) [Alt "Inl" ["x"] (Var "x"),Alt "Inr" ["y"] (Var "y")])]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/8_sums/2_case/002.mhs[0m[1;97m (worth 5) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Case (App (Con "Inl") (App (App (Con "Pair") (Con "True")) (Num 7))) [Alt "Inl" ["x"] (App (Con "Inr") (Var "x")),Alt "Inr" ["y"] (App (Con "Inl") (Var "y"))])] (Var "x"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/8_sums/0_left/0.mhs[0m[1;97m (worth 2) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Con "Inl") (Num 1))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/8_sums/0_left/1.mhs[0m[1;97m (worth 2) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Con "Inl") (App (App (Con "Pair") (Con "()")) (App (Con "Inl") (Num 3))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/006.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Case (Var "x") [Alt "Inl" ["z"] (Var "z"),Alt "Inr" ["k"] (Var "k")])))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/011.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (App (Prim Fst) (Var "x")) (App (Prim Snd) (Var "x")) (App (Var "f") (App (App (Con "Pair") (Con "True")) (Num 10))))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/005.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (Con "True") (Let [Bind "g" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Var "x")))] (Var "g")) (Let [Bind "g" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Var "x")))] (Var "g")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/009.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Case (App (Prim Snd) (Var "x")) [Alt "Inl" ["y"] (App (Prim Fst) (Var "x")),Alt "Inr" ["z"] (Var "z")])))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/008.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (App (Prim Fst) (Var "x")) (App (Prim Fst) (Var "x")) (App (Prim Snd) (Var "x")))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/ifTest3.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (Con "True") (App (Con "Inl") (Num 1)) (App (Con "Inl") (Num 5)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/complex_exprs/010.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (App (App (Prim Eq) (Var "x")) (Num 0)) (Num 0) (App (Var "f") (App (App (Prim Sub) (Var "x")) (Num 1))))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/complex_exprs/ifTest2.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (Con "True") (App (Con "Inl") (Num 1)) (App (Con "Inr") (Con "False")))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/PrimOpTest.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Add) (Num 1)) (App (App (Prim Mul) (Num 3)) (Num 4)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/ConTest3.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (App (Prim Eq) (App (Prim Snd) (App (App (Con "Pair") (Con "True")) (Num 5)))) (Num 10))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/ConTest2.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Prim Fst) (App (App (Con "Pair") (Con "True")) (Num 5)))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/intTest.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Num 0)]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/ConTest1.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Con "()")]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/000.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Num 0)]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/InlTest1.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (App (Con "Inl") (Num 10))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/ifTest1.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (If (Con "True") (Num 1) (Num 3))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/advanced_polymorphic/012.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (App (Con "Pair") (Let [Bind "m" Nothing [] (Recfun (Bind "h" Nothing ["m"] (Let [Bind "z" Nothing [] (Var "x")] (Var "x"))))] (Var "m"))) (App (App (Prim Add) (Var "x")) (Num 1)))))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/advanced_polymorphic/004.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "g" Nothing [] (Recfun (Bind "f" Nothing ["x"] (App (App (Con "Pair") (Recfun (Bind "h" Nothing ["z"] (Var "x")))) (App (App (Prim Add) (Var "x")) (Num 1)))))] (Var "g"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/advanced_polymorphic/001.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "g" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (App (App (Prim Gt) (Var "x")) (Num 1)) (Let [Bind "h" Nothing [] (Recfun (Bind "g" Nothing ["y"] (Var "x")))] (Var "h")) (Let [Bind "h" Nothing [] (Recfun (Bind "g" Nothing ["y"] (Var "x")))] (Var "h")))))] (Var "g"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/advanced_polymorphic/003.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: [Bind "main" Nothing [] (Let [Bind "g" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (Con "True") (Let [Bind "h" Nothing [] (Recfun (Bind "g" Nothing ["y"] (Var "x")))] (Var "h")) (Let [Bind "h" Nothing [] (Recfun (Bind "g" Nothing ["y"] (App (App (Prim Add) (Var "x")) (Num 1))))] (Var "h")))))] (Var "g"))]
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mPassed 0 out of 122 tests: 0% Correct. Total of 0 marks.[0m
