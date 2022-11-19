@@ -1,0 +1,829 @@
+[1;97mRunning test: [0m[37mmain_tests/Task-1/2_functions/1.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: (Int -> Int -> Int) = (recfun f :: (Int -> Int -> Int) x y = (+) x y);[0m
+[31m-              in f 1 2;[0m
+[31m+(line 4, column 26):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/Task-1/1_let/1.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: Unknown expressionLet [Bind "x" Nothing [] (Con "True"),Bind "y" Nothing [] (Num 1),Bind "z" Nothing [] (Con "()")] (Var "x")
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:200:16 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/Task-1/1_let/2.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: Unknown expressionLet [Bind "y" Nothing [] (Var "x"),Bind "x" Nothing [] (Con "True")] (Var "y")
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:200:16 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/9_examples/0.mhs[0m[1;97m (worth 8) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/9_examples/1.mhs[0m[1;97m (worth 8) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall d. forall b. ((Bool + d) + b) = Inl (Inl True);[0m
+[31m+main :: forall b. forall d. ((Bool + d) + b) = Inl (Inl True);[0m
+
+[1;97mRunning test: [0m[37mmain_tests/9_examples/3.mhs[0m[1;97m (worth 8) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/9_examples/2.mhs[0m[1;97m (worth 8) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/9_examples/6.mhs[0m[1;97m (worth 8) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = (recfun f :: (Int -> Int) x = x) 1;[0m
+[31m+(line 1, column 20):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator, "," or ")"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/9_examples/5.mhs[0m[1;97m (worth 8) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: (Int + Int) = let x :: Int = 1;[0m
+[31m-                      in let y :: Int = 2;[0m
+[31m-                         in let f :: forall a. (a -> a) = (recfun f :: (a -> a) z = z);[0m
+[31m-                            in if f True[0m
+[31m-                                  then Inl ((+) x y)[0m
+[31m-                                  else Inr x;[0m
+[31m+(line 6, column 22):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator, "," or ")"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/9_examples/4.mhs[0m[1;97m (worth 8) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let x :: Int = 5;[0m
+[31m+main :: Int = let x ::  = 5;[0m
+[37m               in x;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/3_variables/000.mhs[0m[1;97m (worth 3) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let x :: Int = 1;[0m
+[31m+main :: Int = let x ::  = 1;[0m
+[37m               in x;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/3_variables/001.mhs[0m[1;97m (worth 3) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = let t :: Bool = True;[0m
+[31m+main :: Bool = let t ::  = True;[0m
+[37m                in t;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/3_variables/002.mhs[0m[1;97m (worth 3) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let v :: Int = (-) 1 2;[0m
+[31m+main :: Int = let v ::  = (-) 1 2;[0m
+[37m               in v;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/006.mhs[0m[1;97m (worth 5) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: (Int * Bool) = snd (((), fst (((7, True), ()))));[0m
+[31m+main :: forall r. r = snd (((), fst (((7, True), ()))));[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/007.mhs[0m[1;97m (worth 5) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = fst ((if True[0m
+[31m-                       then 1[0m
+[31m-                       else 2, ()));[0m
+[31m+main :: forall g. g = fst ((if True[0m
+[31m+                               then 1[0m
+[31m+                               else 2, ()));[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/005.mhs[0m[1;97m (worth 5) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = fst ((1, fst ((True, False))));[0m
+[31m+main :: forall n. n = fst ((1, fst ((True, False))));[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/004.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/000.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/001.mhs[0m[1;97m (worth 5) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = fst ((1, 2));[0m
+[31m+main :: forall g. g = fst ((1, 2));[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/003.mhs[0m[1;97m (worth 5) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: () = fst (((), True));[0m
+[31m+main :: forall g. g = fst (((), True));[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/002.mhs[0m[1;97m (worth 5) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = snd ((1, True));[0m
+[31m+main :: forall g. g = snd ((1, True));[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/3_nested_products/008.mhs[0m[1;97m (worth 5) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: (Int * Bool) = let y :: Int = 1;[0m
+[31m-                       in let x :: Bool = True;[0m
+[31m+main :: (Int * Bool) = let y ::  = 1;[0m
+[31m+                       in let x ::  = True;[0m
+[37m                           in ((*) y y, x);[0m
+
+[1;97mRunning test: [0m[37mmain_tests/7_products/1_two_tuple/001.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/7_products/1_two_tuple/003.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/7_products/1_two_tuple/002.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/7_products/0_zero_tuple/0.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/7_products/0_zero_tuple/1.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/7_products/2_mixed_two_tuple/000.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/7_products/2_mixed_two_tuple/001.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/7_products/2_mixed_two_tuple/002.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/006.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/007.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/005.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/004.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/000.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/001.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/003.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/002.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/2_nestedexpr/008.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/Task-2/1.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: Unknown expressionLetrec [Bind "a" (Just (Ty (Base Int))) [] (Var "b"),Bind "b" (Just (Ty (Base Int))) [] (Var "c"),Bind "c" (Just (Ty (Base Int))) [] (Num 7)] (App (App (Prim Add) (Var "c")) (Var "a"))
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:200:16 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/Task-2/2.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: Unknown expressionLetrec [Bind "a" Nothing [] (App (App (Prim Lt) (Var "b")) (Var "c")),Bind "b" Nothing [] (Num 8),Bind "c" Nothing [] (Num 7)] (Var "c")
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:200:16 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/006.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/007.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/011.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/005.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/004.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/010.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/014.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/000.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/001.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/003.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/002.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/009.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/primops/008.mhs[0m[1;97m (worth 7) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/dividebyzero/000.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/1_primops/unarynegate/000.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/Task-3/1.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: Unknown expressionLet [Bind "x" (Just (Ty (Base Bool))) [] (Con "True"),Bind "y" (Just (Ty (Base Int))) [] (Num 1),Bind "z" Nothing [] (Con "()")] (Var "x")
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:200:16 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/Task-3/3.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: Unknown expressionLetrec [Bind "a" (Just (Ty (Base Bool))) [] (App (App (Prim Lt) (Var "b")) (Var "c")),Bind "b" Nothing [] (Num 8),Bind "c" (Just (Ty (Base Int))) [] (Num 7)] (Var "c")
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:200:16 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/Task-3/2.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
+[31mStderr was:[0m
+minhs-2: Unknown expressionLet [Bind "x" (Just (Ty (Base Bool))) [] (Con "True"),Bind "y" (Just (Ty (Base Int))) [] (Num 1),Bind "z" Nothing [] (Con "()")] (Let [Bind "x" (Just (Ty (Base Int))) [] (Num 0),Bind "y" Nothing [] (Var "z"),Bind "z" Nothing [] (Con "True")] (Var "z"))
+CallStack (from HasCallStack):
+  error, called at ./MinHS/TyInfer.hs:200:16 in main:MinHS.TyInfer
+
+[31mStdout was:[0m
+
+[1;97mRunning test: [0m[37mmain_tests/Task-3/5.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = let f :: forall a. (a -> Int) = (recfun f :: (a -> Int) x = (- 1));[0m
+[31m-               in let f :: forall d. (d -> Int) = (recfun f :: (d -> Int) x = (- 2));[0m
+[31m-                  in let f :: forall g. (g -> Int) = (recfun f :: (g -> Int) x = (- 3));[0m
+[31m-                     in let f :: forall j. (j -> Int) = (recfun f :: (j -> Int) x = (- 4));[0m
+[31m-                        in let f :: forall m. (m -> Int) = (recfun f :: (m -> Int) x = (- 5));[0m
+[31m-                           in let f :: forall p. (p -> Int) = (recfun f :: (p -> Int) x = (- 6));[0m
+[31m-                              in let f :: forall s. (s -> Int) = (recfun f :: (s -> Int) x = (- 7));[0m
+[31m-                                 in let f :: forall v. (v -> Int) = (recfun f :: (v -> Int) x = (- 8));[0m
+[31m-                                    in let f :: forall y. (y -> Int) = (recfun f :: (y -> Int) x = (- 9));[0m
+[31m-                                       in let f :: forall a2. (a2 -> Bool) = (recfun f :: (a2 -> Bool) x = True);[0m
+[31m-                                          in f 7;[0m
+[31m+(line 4, column 21):[0m
+[31m+unexpected ":"[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/Task-3/4.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: (Int -> Int) = (recfun f :: (Int -> Int) x = (+) x x);[0m
+[31m-              in f 1;[0m
+[31m+(line 4, column 22):[0m
+[31m+unexpected ":"[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/0_basics/bools/000.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/0_basics/bools/001.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/0_basics/ints/000.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/0_basics/ints/001.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/0_basics/ints/003.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/0_basics/main/main.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/006.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/007.mhs[0m[1;97m (worth 5) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = let x :: Int = 1;[0m
+[31m+main :: Bool = let x ::  = 1;[0m
+[37m                in if (<) x 2[0m
+[37m                      then True[0m
+[37m                      else False;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/005.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/004.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/000.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/001.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/003.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/4_ifthenelse/002.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/6_programs/test.mhs[0m[1;97m (worth 5) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = let f :: (Int -> Bool) = (recfun f :: (Int -> Bool) x = if (<) 0 10[0m
+[31m-                                                                          then True[0m
+[31m-                                                                          else f ((-) x 1));[0m
+[31m-               in f 16;[0m
+[31m+(line 4, column 20):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/2_application/004.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: (Int -> Int) = (recfun f :: (Int -> Int) x = (+) x 1);[0m
+[31m-              in let g :: (Int -> Int) = f;[0m
+[31m-                 in g 1;[0m
+[31m+(line 5, column 20):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/2_application/000.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = let isTrue :: (Bool -> Bool) = (recfun isTrue :: (Bool -> Bool) x = if x[0m
+[31m-                                                                                      then True[0m
+[31m-                                                                                      else False);[0m
+[31m-               in let f :: (Int -> Bool) = (recfun f :: (Int -> Bool) x = (==) x 10);[0m
+[31m-                  in isTrue (f 11);[0m
+[31m+(line 4, column 29):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/2_application/001.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: (Int -> Int) = (recfun f :: (Int -> Int) x = (*) 2 x);[0m
+[31m-              in let g :: (Int -> Int) = (recfun g :: (Int -> Int) x = (- x));[0m
+[31m-                 in g (f 2);[0m
+[31m+(line 3, column 24):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/2_application/002.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let g :: (Int -> Int) = (recfun g' :: (Int -> Int) x = (*) x x);[0m
+[31m-              in let f :: (Int -> Int) = g;[0m
+[31m-                 in g 7;[0m
+[31m+(line 4, column 21):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/4_partial_application/005.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: (Int -> Int -> Int) = (recfun f :: (Int -> Int -> Int) x = (recfun g :: (Int -> Int) y = (*) x ((- y))));[0m
+[31m-              in let z :: forall h. (h -> Int -> Int) = (recfun z :: (h -> Int -> Int) x = f 3);[0m
+[31m-                 in z 2 4;[0m
+[31m+(line 4, column 21):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/4_partial_application/000.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: (Int -> Int -> Int) = (recfun f :: (Int -> Int -> Int) x = (recfun g :: (Int -> Int) y = (+) x y));[0m
+[31m-              in f 1 2;[0m
+[31m+(line 4, column 20):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/4_partial_application/003.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: forall a. forall c. (a -> c -> a) = (recfun f :: (a -> c -> a) x = (recfun g :: (c -> a) y = x));[0m
+[31m-              in let g :: forall f. (f -> Int) = f 10;[0m
+[31m-                 in g 3;[0m
+[31m+(line 4, column 20):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/4_partial_application/002.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: forall a. (a -> Int -> Int) = (recfun f :: (a -> Int -> Int) x = (recfun g :: (Int -> Int) y = (+) y y));[0m
+[31m-              in f 2 3;[0m
+[31m+(line 4, column 20):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/4_partial_application/008.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let x :: Int = 8;[0m
+[31m-              in let f :: (Int -> Int -> Int) = (recfun f :: (Int -> Int -> Int) w = (recfun g :: (Int -> Int) y = (+) ((+) ((+) y x) w) 1));[0m
+[31m-                 in f 3 2;[0m
+[31m+(line 8, column 20):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/006.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let plus :: (Int -> Int -> Int) = (recfun g :: (Int -> Int -> Int) x = (recfun g' :: (Int -> Int) y = (+) x y));[0m
+[31m-              in let inc :: (Int -> Int) = (recfun g :: (Int -> Int) x = (+) x 1);[0m
+[31m-                 in let f :: (Int -> Int) = (recfun f :: (Int -> Int) x = if (==) x 10[0m
+[31m-                                                                             then 10[0m
+[31m-                                                                             else let y :: Int = f ((+) x 1);[0m
+[31m-                                                                                  in plus let z :: Int = 4;[0m
+[31m-                                                                                          in inc z y);[0m
+[31m-                    in f ((- 1003));[0m
+[31m+(line 6, column 27):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/005.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let a :: Int = 1;[0m
+[31m-              in let b :: Int = 2;[0m
+[31m-                 in let c :: Int = 3;[0m
+[31m-                    in let d :: Int = 4;[0m
+[31m-                       in let e :: Int = 5;[0m
+[31m-                          in let f :: Int = 6;[0m
+[31m-                             in let g :: Int = 7;[0m
+[31m-                                in let h :: Int = 8;[0m
+[31m-                                   in let i :: Int = 9;[0m
+[31m-                                      in let j :: Int = 10;[0m
+[31m-                                         in let k :: Int = 11;[0m
+[31m-                                            in let l :: Int = 12;[0m
+[31m-                                               in let m :: Int = 13;[0m
+[31m-                                                  in let n :: Int = 14;[0m
+[31m-                                                     in let o :: Int = 15;[0m
+[31m-                                                        in let p :: Int = 16;[0m
+[31m-                                                           in let q :: Int = 17;[0m
+[31m-                                                              in let r :: Int = 18;[0m
+[31m-                                                                 in let s :: Int = 19;[0m
+[31m-                                                                    in let t :: Int = 20;[0m
+[31m-                                                                       in let u :: Int = 21;[0m
+[31m-                                                                          in let v :: Int = 22;[0m
+[31m-                                                                             in let w :: Int = 23;[0m
+[31m-                                                                                in let x :: Int = 24;[0m
+[31m-                                                                                   in let y :: Int = 25;[0m
+[31m-                                                                                      in let z :: Int = 26;[0m
+[31m+main :: Int = let a ::  = 1;[0m
+[31m+              in let b ::  = 2;[0m
+[31m+                 in let c ::  = 3;[0m
+[31m+                    in let d ::  = 4;[0m
+[31m+                       in let e ::  = 5;[0m
+[31m+                          in let f ::  = 6;[0m
+[31m+                             in let g ::  = 7;[0m
+[31m+                                in let h ::  = 8;[0m
+[31m+                                   in let i ::  = 9;[0m
+[31m+                                      in let j ::  = 10;[0m
+[31m+                                         in let k ::  = 11;[0m
+[31m+                                            in let l ::  = 12;[0m
+[31m+                                               in let m ::  = 13;[0m
+[31m+                                                  in let n ::  = 14;[0m
+[31m+                                                     in let o ::  = 15;[0m
+[31m+                                                        in let p ::  = 16;[0m
+[31m+                                                           in let q ::  = 17;[0m
+[31m+                                                              in let r ::  = 18;[0m
+[31m+                                                                 in let s ::  = 19;[0m
+[31m+                                                                    in let t ::  = 20;[0m
+[31m+                                                                       in let u ::  = 21;[0m
+[31m+                                                                          in let v ::  = 22;[0m
+[31m+                                                                             in let w ::  = 23;[0m
+[31m+                                                                                in let x ::  = 24;[0m
+[31m+                                                                                   in let y ::  = 25;[0m
+[31m+                                                                                      in let z ::  = 26;[0m
+[37m                                                                                          in (*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) ((*) a b) c) d) e) f) g) h) i) j) k) l) m) n) o) p) q) r) s) t) u) v) w) x) y) z;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/004.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let a :: Int = 0;[0m
+[31m-              in let b :: Int = 2;[0m
+[31m-                 in let c :: Int = 3;[0m
+[31m-                    in let d :: Int = 4;[0m
+[31m-                       in let e :: Int = 5;[0m
+[31m-                          in let f :: Int = 6;[0m
+[31m-                             in let g :: Int = 7;[0m
+[31m-                                in let h :: Int = 8;[0m
+[31m-                                   in let i :: Int = 9;[0m
+[31m-                                      in let j :: Int = 10;[0m
+[31m-                                         in let k :: Int = 11;[0m
+[31m-                                            in let l :: Int = 12;[0m
+[31m-                                               in let m :: Int = 13;[0m
+[31m-                                                  in let n :: Int = 14;[0m
+[31m-                                                     in let o :: Int = 15;[0m
+[31m-                                                        in let p :: Int = 16;[0m
+[31m-                                                           in let q :: Int = 17;[0m
+[31m-                                                              in let r :: Int = 18;[0m
+[31m-                                                                 in let s :: Int = 19;[0m
+[31m-                                                                    in let t :: Int = 20;[0m
+[31m-                                                                       in let u :: Int = 21;[0m
+[31m-                                                                          in let v :: Int = 22;[0m
+[31m-                                                                             in let w :: Int = 23;[0m
+[31m-                                                                                in let x :: Int = 24;[0m
+[31m-                                                                                   in let y :: Int = 25;[0m
+[31m-                                                                                      in let z :: Int = 26;[0m
+[31m-                                                                                         in let za :: Int = 26;[0m
+[31m-                                                                                            in let zb :: Int = 27;[0m
+[31m-                                                                                               in let z1 :: Int = 1;[0m
+[31m-                                                                                                  in let z2 :: Int = 2;[0m
+[31m-                                                                                                     in let z3 :: Int = 3;[0m
+[31m-                                                                                                        in let z4 :: Int = 4;[0m
+[31m-                                                                                                           in let z5 :: Int = 5;[0m
+[31m-                                                                                                              in let z6 :: Int = 6;[0m
+[31m-                                                                                                                 in let z7 :: Int = 7;[0m
+[31m-                                                                                                                    in let z8 :: Int = 8;[0m
+[31m-                                                                                                                       in let z9 :: Int = 9;[0m
+[31m-                                                                                                                          in let z10 :: Int = 10;[0m
+[31m-                                                                                                                             in let z11 :: Int = 11;[0m
+[31m-                                                                                                                                in let z12 :: Int = 12;[0m
+[31m-                                                                                                                                   in let z13 :: Int = 13;[0m
+[31m-                                                                                                                                      in let z14 :: Int = 14;[0m
+[31m-                                                                                                                                         in let z15 :: Int = 15;[0m
+[31m-                                                                                                                                            in let z16 :: Int = 16;[0m
+[31m-                                                                                                                                               in let z17 :: Int = 17;[0m
+[31m-                                                                                                                                                  in let z18 :: Int = 18;[0m
+[31m-                                                                                                                                                     in let z19 :: Int = 19;[0m
+[31m-                                                                                                                                                        in let z20 :: Int = 20;[0m
+[31m-                                                                                                                                                           in let z21 :: Int = 21;[0m
+[31m-                                                                                                                                                              in let z22 :: Int = 22;[0m
+[31m-                                                                                                                                                                 in let z23 :: Int = 23;[0m
+[31m-                                                                                                                                                                    in let z24 :: Int = 24;[0m
+[31m-                                                                                                                                                                       in let z25 :: Int = 25;[0m
+[31m-                                                                                                                                                                          in let z26 :: Int = 26;[0m
+[31m-                                                                                                                                                                             in let z27 :: Int = 27;[0m
+[31m-                                                                                                                                                                                in let z28 :: Int = 28;[0m
+[31m-                                                                                                                                                                                   in let z29 :: Int = 29;[0m
+[31m-                                                                                                                                                                                      in let z30 :: Int = 30;[0m
+[31m-                                                                                                                                                                                         in let z31 :: Int = 31;[0m
+[31m-                                                                                                                                                                                            in let z32 :: Int = 32;[0m
+[31m-                                                                                                                                                                                               in let z33 :: Int = 33;[0m
+[31m-                                                                                                                                                                                                  in let z34 :: Int = 34;[0m
+[31m-                                                                                                                                                                                                     in let z35 :: Int = 35;[0m
+[31m-                                                                                                                                                                                                        in let z36 :: Int = 36;[0m
+[31m-                                                                                                                                                                                                           in let z37 :: Int = 37;[0m
+[31m-                                                                                                                                                                                                              in let z38 :: Int = 38;[0m
+[31m-                                                                                                                                                                                                                 in let z39 :: Int = 39;[0m
+[31m-                                                                                                                                                                                                                    in let z40 :: Int = 40;[0m
+[31m-                                                                                                                                                                                                                       in let z41 :: Int = 41;[0m
+[31m-                                                                                                                                                                                                                          in let z42 :: Int = 42;[0m
+[31m-                                                                                                                                                                                                                             in let z43 :: Int = 43;[0m
+[31m-                                                                                                                                                                                                                                in let z44 :: Int = 44;[0m
+[31m-                                                                                                                                                                                                                                   in let z45 :: Int = 45;[0m
+[31m-                                                                                                                                                                                                                                      in let z46 :: Int = 46;[0m
+[31m-                                                                                                                                                                                                                                         in let z47 :: Int = 47;[0m
+[31m-                                                                                                                                                                                                                                            in let z48 :: Int = 48;[0m
+[31m-                                                                                                                                                                                                                                               in let z49 :: Int = 49;[0m
+[31m-                                                                                                                                                                                                                                                  in let z50 :: Int = 50;[0m
+[31m-                                                                                                                                                                                                                                                     in let z51 :: Int = 51;[0m
+[31m-                                                                                                                                                                                                                                                        in let z52 :: Int = 52;[0m
+[31m-                                                                                                                                                                                                                                                           in let z53 :: Int = 53;[0m
+[31m-                                                                                                                                                                                                                                                              in let z54 :: Int = 54;[0m
+[31m-                                                                                                                                                                                                                                                                 in let z55 :: Int = 55;[0m
+[31m-                                                                                                                                                                                                                                                                    in let z56 :: Int = 56;[0m
+[31m-                                                                                                                                                                                                                                                                       in let z57 :: Int = 57;[0m
+[31m-                                                                                                                                                                                                                                                                          in let z58 :: Int = 58;[0m
+[31m-                                                                                                                                                                                                                                                                             in let z59 :: Int = 59;[0m
+[31m-                                                                                                                                                                                                                                                                                in let z60 :: Int = 60;[0m
+[31m-                                                                                                                                                                                                                                                                                   in let z61 :: Int = 61;[0m
+[31m-                                                                                                                                                                                                                                                                                      in let z62 :: Int = 62;[0m
+[31m-                                                                                                                                                                                                                                                                                         in let z63 :: Int = 63;[0m
+[31m-                                                                                                                                                                                                                                                                                            in let z64 :: Int = 64;[0m
+[31m-                                                                                                                                                                                                                                                                                               in let z65 :: Int = 65;[0m
+[31m-                                                                                                                                                                                                                                                                                                  in let z66 :: Int = 66;[0m
+[31m-                                                                                                                                                                                                                                                                                                     in let z67 :: Int = 67;[0m
+[31m-                                                                                                                                                                                                                                                                                                        in let z68 :: Int = 68;[0m
+[31m+main :: Int = let a ::  = 0;[0m
+[31m+              in let b ::  = 2;[0m
+[31m+                 in let c ::  = 3;[0m
+[31m+                    in let d ::  = 4;[0m
+[31m+                       in let e ::  = 5;[0m
+[31m+                          in let f ::  = 6;[0m
+[31m+                             in let g ::  = 7;[0m
+[31m+                                in let h ::  = 8;[0m
+[31m+                                   in let i ::  = 9;[0m
+[31m+                                      in let j ::  = 10;[0m
+[31m+                                         in let k ::  = 11;[0m
+[31m+                                            in let l ::  = 12;[0m
+[31m+                                               in let m ::  = 13;[0m
+[31m+                                                  in let n ::  = 14;[0m
+[31m+                                                     in let o ::  = 15;[0m
+[31m+                                                        in let p ::  = 16;[0m
+[31m+                                                           in let q ::  = 17;[0m
+[31m+                                                              in let r ::  = 18;[0m
+[31m+                                                                 in let s ::  = 19;[0m
+[31m+                                                                    in let t ::  = 20;[0m
+[31m+                                                                       in let u ::  = 21;[0m
+[31m+                                                                          in let v ::  = 22;[0m
+[31m+                                                                             in let w ::  = 23;[0m
+[31m+                                                                                in let x ::  = 24;[0m
+[31m+                                                                                   in let y ::  = 25;[0m
+[31m+                                                                                      in let z ::  = 26;[0m
+[31m+                                                                                         in let za ::  = 26;[0m
+[31m+                                                                                            in let zb ::  = 27;[0m
+[31m+                                                                                               in let z1 ::  = 1;[0m
+[31m+                                                                                                  in let z2 ::  = 2;[0m
+[31m+                                                                                                     in let z3 ::  = 3;[0m
+[31m+                                                                                                        in let z4 ::  = 4;[0m
+[31m+                                                                                                           in let z5 ::  = 5;[0m
+[31m+                                                                                                              in let z6 ::  = 6;[0m
+[31m+                                                                                                                 in let z7 ::  = 7;[0m
+[31m+                                                                                                                    in let z8 ::  = 8;[0m
+[31m+                                                                                                                       in let z9 ::  = 9;[0m
+[31m+                                                                                                                          in let z10 ::  = 10;[0m
+[31m+                                                                                                                             in let z11 ::  = 11;[0m
+[31m+                                                                                                                                in let z12 ::  = 12;[0m
+[31m+                                                                                                                                   in let z13 ::  = 13;[0m
+[31m+                                                                                                                                      in let z14 ::  = 14;[0m
+[31m+                                                                                                                                         in let z15 ::  = 15;[0m
+[31m+                                                                                                                                            in let z16 ::  = 16;[0m
+[31m+                                                                                                                                               in let z17 ::  = 17;[0m
+[31m+                                                                                                                                                  in let z18 ::  = 18;[0m
+[31m+                                                                                                                                                     in let z19 ::  = 19;[0m
+[31m+                                                                                                                                                        in let z20 ::  = 20;[0m
+[31m+                                                                                                                                                           in let z21 ::  = 21;[0m
+[31m+                                                                                                                                                              in let z22 ::  = 22;[0m
+[31m+                                                                                                                                                                 in let z23 ::  = 23;[0m
+[31m+                                                                                                                                                                    in let z24 ::  = 24;[0m
+[31m+                                                                                                                                                                       in let z25 ::  = 25;[0m
+[31m+                                                                                                                                                                          in let z26 ::  = 26;[0m
+[31m+                                                                                                                                                                             in let z27 ::  = 27;[0m
+[31m+                                                                                                                                                                                in let z28 ::  = 28;[0m
+[31m+                                                                                                                                                                                   in let z29 ::  = 29;[0m
+[31m+                                                                                                                                                                                      in let z30 ::  = 30;[0m
+[31m+                                                                                                                                                                                         in let z31 ::  = 31;[0m
+[31m+                                                                                                                                                                                            in let z32 ::  = 32;[0m
+[31m+                                                                                                                                                                                               in let z33 ::  = 33;[0m
+[31m+                                                                                                                                                                                                  in let z34 ::  = 34;[0m
+[31m+                                                                                                                                                                                                     in let z35 ::  = 35;[0m
+[31m+                                                                                                                                                                                                        in let z36 ::  = 36;[0m
+[31m+                                                                                                                                                                                                           in let z37 ::  = 37;[0m
+[31m+                                                                                                                                                                                                              in let z38 ::  = 38;[0m
+[31m+                                                                                                                                                                                                                 in let z39 ::  = 39;[0m
+[31m+                                                                                                                                                                                                                    in let z40 ::  = 40;[0m
+[31m+                                                                                                                                                                                                                       in let z41 ::  = 41;[0m
+[31m+                                                                                                                                                                                                                          in let z42 ::  = 42;[0m
+[31m+                                                                                                                                                                                                                             in let z43 ::  = 43;[0m
+[31m+                                                                                                                                                                                                                                in let z44 ::  = 44;[0m
+[31m+                                                                                                                                                                                                                                   in let z45 ::  = 45;[0m
+[31m+                                                                                                                                                                                                                                      in let z46 ::  = 46;[0m
+[31m+                                                                                                                                                                                                                                         in let z47 ::  = 47;[0m
+[31m+                                                                                                                                                                                                                                            in let z48 ::  = 48;[0m
+[31m+                                                                                                                                                                                                                                               in let z49 ::  = 49;[0m
+[31m+                                                                                                                                                                                                                                                  in let z50 ::  = 50;[0m
+[31m+                                                                                                                                                                                                                                                     in let z51 ::  = 51;[0m
+[31m+                                                                                                                                                                                                                                                        in let z52 ::  = 52;[0m
+[31m+                                                                                                                                                                                                                                                           in let z53 ::  = 53;[0m
+[31m+                                                                                                                                                                                                                                                              in let z54 ::  = 54;[0m
+[31m+                                                                                                                                                                                                                                                                 in let z55 ::  = 55;[0m
+[31m+                                                                                                                                                                                                                                                                    in let z56 ::  = 56;[0m
+[31m+                                                                                                                                                                                                                                                                       in let z57 ::  = 57;[0m
+[31m+                                                                                                                                                                                                                                                                          in let z58 ::  = 58;[0m
+[31m+                                                                                                                                                                                                                                                                             in let z59 ::  = 59;[0m
+[31m+                                                                                                                                                                                                                                                                                in let z60 ::  = 60;[0m
+[31m+                                                                                                                                                                                                                                                                                   in let z61 ::  = 61;[0m
+[31m+                                                                                                                                                                                                                                                                                      in let z62 ::  = 62;[0m
+[31m+                                                                                                                                                                                                                                                                                         in let z63 ::  = 63;[0m
+[31m+                                                                                                                                                                                                                                                                                            in let z64 ::  = 64;[0m
+[31m+                                                                                                                                                                                                                                                                                               in let z65 ::  = 65;[0m
+[31m+                                                                                                                                                                                                                                                                                                  in let z66 ::  = 66;[0m
+[31m+                                                                                                                                                                                                                                                                                                     in let z67 ::  = 67;[0m
+[31m+                                                                                                                                                                                                                                                                                                        in let z68 ::  = 68;[0m
+[37m                                                                                                                                                                                                                                                                                                            in a;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/000.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = let x :: Bool = True;[0m
+[31m+main :: Bool = let x ::  = True;[0m
+[37m                in x;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/001.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let i :: Int = 1;[0m
+[31m+main :: Int = let i ::  = 1;[0m
+[37m               in (+) i i;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/003.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = let a :: Bool = True;[0m
+[31m-               in let b :: Bool = False;[0m
+[31m+main :: Bool = let a ::  = True;[0m
+[31m+               in let b ::  = False;[0m
+[37m                   in if (<) 1 2[0m
+[37m                         then a[0m
+[37m                         else b;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/002.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let x :: Int = 1;[0m
+[31m-              in let y :: Int = 2;[0m
+[31m+main :: Int = let x ::  = 1;[0m
+[31m+              in let y ::  = 2;[0m
+[37m                  in (+) x y;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/006.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = (recfun f :: (Int -> Int) x = (+) x x) 1;[0m
+[31m+(line 2, column 20):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator, "," or ")"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/007.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let g :: (Int -> Int) = (recfun f :: (Int -> Int) x = (+) x x);[0m
+[31m-              in g 1;[0m
+[31m+(line 3, column 24):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/005.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: forall a. forall c. forall e. forall g. (a -> c -> e -> g -> Int -> Int) = (recfun f :: (a -> c -> e -> g -> Int -> Int) x = (recfun f :: (c -> e -> g -> Int -> Int) x = (recfun f :: (e -> g -> Int -> Int) x = (recfun f :: (g -> Int -> Int) x = (recfun f :: (Int -> Int) x = (*) 2 x)))));[0m
+[31m-              in f 0 0 0 0 7;[0m
+[31m+(line 5, column 21):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator, "," or ")"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/004.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = let f :: forall a. (a -> Int) = (recfun f :: (a -> Int) x = (- 1));[0m
+[31m-               in let f :: forall d. (d -> Int) = (recfun f :: (d -> Int) x = (- 2));[0m
+[31m-                  in let f :: forall g. (g -> Int) = (recfun f :: (g -> Int) x = (- 3));[0m
+[31m-                     in let f :: forall j. (j -> Int) = (recfun f :: (j -> Int) x = (- 4));[0m
+[31m-                        in let f :: forall m. (m -> Int) = (recfun f :: (m -> Int) x = (- 5));[0m
+[31m-                           in let f :: forall p. (p -> Int) = (recfun f :: (p -> Int) x = (- 6));[0m
+[31m-                              in let f :: forall s. (s -> Int) = (recfun f :: (s -> Int) x = (- 7));[0m
+[31m-                                 in let f :: forall v. (v -> Int) = (recfun f :: (v -> Int) x = (- 8));[0m
+[31m-                                    in let f :: forall y. (y -> Int) = (recfun f :: (y -> Int) x = (- 9));[0m
+[31m-                                       in let f :: forall a2. (a2 -> Bool) = (recfun f :: (a2 -> Bool) x = True);[0m
+[31m-                                          in f 7;[0m
+[31m+(line 4, column 23):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/000.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: (Int -> Int) = (recfun f :: (Int -> Int) x = (+) x x);[0m
+[31m-              in f 1;[0m
+[31m+(line 4, column 24):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/001.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = let lt0 :: (Int -> Bool) = (recfun lt0 :: (Int -> Bool) x = if (<) x 0[0m
+[31m-                                                                              then True[0m
+[31m-                                                                              else False);[0m
+[31m-               in let gt1 :: (Int -> Bool) = (recfun gt1 :: (Int -> Bool) x = (>) x 1);[0m
+[31m-                  in if lt0 ((- 10))[0m
+[31m-                        then if gt1 0[0m
+[31m-                                then False[0m
+[31m-                                else True[0m
+[31m-                        else False;[0m
+[31m+(line 4, column 28):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/002.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let x :: Int = 2;[0m
+[31m-              in let square :: (Int -> Int) = (recfun square :: (Int -> Int) x = (*) x x);[0m
+[31m-                 in square (square x);[0m
+[31m+(line 9, column 34):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/008.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall k. (Int -> k -> Int) = let g :: forall j. (Int -> j -> Int) = (recfun f :: (Int -> j -> Int) x = if True[0m
+[31m-                                                                                                                   then let h :: forall c. (c -> Int) = (recfun g :: (c -> Int) y = x);[0m
+[31m-                                                                                                                        in h[0m
+[31m-                                                                                                                   else let h :: forall f. (f -> Int) = (recfun g :: (f -> Int) y = (+) x 1);[0m
+[31m-                                                                                                                        in h);[0m
+[31m-                                      in g;[0m
+[31m+(line 2, column 22):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/3_recursion/005.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: (Int -> Int) = (recfun f :: (Int -> Int) x = if (==) x 1000[0m
+[31m-                                                                       then x[0m
+[31m-                                                                       else f ((+) x 1));[0m
+[31m-              in f 10;[0m
+[31m+(line 4, column 24):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/3_recursion/000.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let f :: (Int -> Int) = (recfun f :: (Int -> Int) x = if (==) x 100[0m
+[31m-                                                                       then x[0m
+[31m-                                                                       else f ((+) x 1));[0m
+[31m-              in f 10;[0m
+[31m+(line 4, column 22):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/3_recursion/001.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = (recfun f :: (Int -> Int -> Int) x = (recfun g :: (Int -> Int) y = if (==) x 10[0m
+[31m-                                                                                    then y[0m
+[31m-                                                                                    else f ((+) x 1) ((+) y 2))) 0 2;[0m
+[31m+(line 2, column 21):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator, "," or ")"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/3_recursion/002.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = let fib :: (Int -> Int) = (recfun fib :: (Int -> Int) n = if (==) n 0[0m
+[31m-                                                                           then 0[0m
+[31m-                                                                           else if (==) n 1[0m
+[31m-                                                                                   then 1[0m
+[31m-                                                                                   else (+) (fib ((-) n 2)) (fib ((-) n 1)));[0m
+[31m-              in let n :: Int = 25;[0m
+[31m-                 in fib n;[0m
+[31m+(line 3, column 26):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/5_let/3_recursion/fac.mhs[0m[1;97m (worth 7) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Int = (recfun fac :: (Int -> Int) n = if (==) n 0[0m
+[31m-                                                 then 1[0m
+[31m-                                                 else (*) n (fac ((-) n 1))) 14;[0m
+[31m+(line 2, column 22):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator, "," or ")"[0m
+
+[1;97mRunning test: [0m[37mmain_tests/8_sums/1_right/001.mhs[0m[1;97m (worth 2) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/8_sums/1_right/003.mhs[0m[1;97m (worth 2) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/8_sums/1_right/002.mhs[0m[1;97m (worth 2) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall a. forall e. forall i. (a + (e + Int) * i + ()) = Inr ((Inr 1, Inr ()));[0m
+[31m+main :: forall i. forall e. forall a. (a + (e + Int) * i + ()) = Inr ((Inr 1, Inr ()));[0m
+
+[1;97mRunning test: [0m[37mmain_tests/8_sums/2_case/000.mhs[0m[1;97m (worth 5) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/8_sums/2_case/002.mhs[0m[1;97m (worth 5) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall p. (p + Bool * Int) = let x :: forall b. (b + Bool * Int) = (case Inl ((True, 7)) of Inl x -> Inr x;[0m
+[31m-                                                                                                    Inr y -> Inl y;);[0m
+[31m+main :: forall p. (p + Bool * Int) = let x ::  = (case Inl ((True, 7)) of Inl x -> Inr x;[0m
+[31m+                                                                          Inr y -> Inl y;);[0m
+[37m                                      in x;[0m
+
+[1;97mRunning test: [0m[37mmain_tests/8_sums/0_left/0.mhs[0m[1;97m (worth 2) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mmain_tests/8_sums/0_left/1.mhs[0m[1;97m (worth 2) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall g. forall b. ((() * Int + g) + b) = Inl (((), Inl 3));[0m
+[31m+main :: forall b. forall g. ((() * Int + g) + b) = Inl (((), Inl 3));[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/006.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall d. ((d + d) -> d) = (recfun f :: ((d + d) -> d) x = (case x of Inl z -> z;[0m
+[31m-                                                                              Inr k -> k;));[0m
+[31m+(line 1, column 19):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/011.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: ((Bool * Int) -> Int) = (recfun f :: ((Bool * Int) -> Int) x = if fst x[0m
+[31m-                                                                          then snd x[0m
+[31m-                                                                          else f ((True, 10)));[0m
+[31m+(line 1, column 19):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/005.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall f. (f -> f) = if True[0m
+[31m-                                then let g :: forall a. (a -> a) = (recfun f :: (a -> a) x = x);[0m
+[31m-                                     in g[0m
+[31m-                                else let g :: forall d. (d -> d) = (recfun f :: (d -> d) x = x);[0m
+[31m-                                     in g;[0m
+[31m+(line 3, column 29):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/009.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall j. forall f. ((j * f + j) -> j) = (recfun f :: ((j * f + j) -> j) x = (case snd x of Inl y -> fst x;[0m
+[31m-                                                                                                    Inr z -> z;));[0m
+[31m+(line 1, column 19):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/008.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: ((Bool * Bool) -> Bool) = (recfun f :: ((Bool * Bool) -> Bool) x = if fst x[0m
+[31m-                                                                              then fst x[0m
+[31m-                                                                              else snd x);[0m
+[31m+(line 1, column 19):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/polymorphic/ifTest3.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mzz_more_tests/complex_exprs/010.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: (Int -> Int) = (recfun f :: (Int -> Int) x = if (==) x 0[0m
+[31m-                                                        then 0[0m
+[31m-                                                        else f ((-) x 1));[0m
+[31m+(line 1, column 19):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/complex_exprs/ifTest2.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/PrimOpTest.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/ConTest3.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/ConTest2.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: Bool = fst ((True, 5));[0m
+[31m+main :: forall g. g = fst ((True, 5));[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/intTest.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/ConTest1.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/000.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/InlTest1.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mzz_more_tests/basic_exprs/ifTest1.mhs[0m[1;97m (worth 1) :-  [0m[1;92mStdout Check Passed![0m
+[1;97mRunning test: [0m[37mzz_more_tests/advanced_polymorphic/012.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall g. (Int -> (g -> Int) * Int) = (recfun f :: (Int -> (g -> Int) * Int) x = (let m :: forall e. (e -> Int) = (recfun h :: (e -> Int) m = let z :: Int = x;[0m
+[31m-                                                                                                                                                      in x);[0m
+[31m-                                                                                          in m, (+) x 1));[0m
+[31m+(line 1, column 19):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/advanced_polymorphic/004.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall k. (Int -> (k -> Int) * Int) = let g :: forall e. (Int -> (e -> Int) * Int) = (recfun f :: (Int -> (e -> Int) * Int) x = ((recfun h :: (e -> Int) z = x), (+) x 1));[0m
+[31m-                                              in g;[0m
+[31m+(line 2, column 22):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/advanced_polymorphic/001.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall k. (Int -> k -> Int) = let g :: forall j. (Int -> j -> Int) = (recfun f :: (Int -> j -> Int) x = if (>) x 1[0m
+[31m-                                                                                                                   then let h :: forall e. (e -> Int) = (recfun g :: (e -> Int) y = x);[0m
+[31m-                                                                                                                        in h[0m
+[31m-                                                                                                                   else let h :: forall h. (h -> Int) = (recfun g :: (h -> Int) y = x);[0m
+[31m-                                                                                                                        in h);[0m
+[31m-                                      in g;[0m
+[31m+(line 2, column 22):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mRunning test: [0m[37mzz_more_tests/advanced_polymorphic/003.mhs[0m[1;97m (worth 1) :-  [0m[1;91mStdout Check Failed[0m:
+[31m-main :: forall k. (Int -> k -> Int) = let g :: forall j. (Int -> j -> Int) = (recfun f :: (Int -> j -> Int) x = if True[0m
+[31m-                                                                                                                   then let h :: forall c. (c -> Int) = (recfun g :: (c -> Int) y = x);[0m
+[31m-                                                                                                                        in h[0m
+[31m-                                                                                                                   else let h :: forall f. (f -> Int) = (recfun g :: (f -> Int) y = (+) x 1);[0m
+[31m-                                                                                                                        in h);[0m
+[31m-                                      in g;[0m
+[31m+(line 2, column 22):[0m
+[31m+unexpected "="[0m
+[31m+expecting term, operator or ";"[0m
+
+[1;97mPassed 63 out of 132 tests: 47% Correct. Total of 283 marks.[0m
