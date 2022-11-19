@@ -130,7 +130,8 @@ generalise g t = let diff = tv t \\ tvGamma g in foldl (flip Forall) (Ty t) diff
 inferProgram :: Gamma -> Program -> TC (Program, Type, Subst)
 inferProgram g [Bind name _ [] e] = do
   (exp, t, subst) <- inferExp g e
-  return ([Bind "main" (Just $ generalise g t) [] exp], t, subst)
+  let allTypedExp = allTypes (substQType subst) exp
+  return ([Bind "main" (Just $ generalise g t) [] allTypedExp], t, subst)
 
 -- case generalise g (substitute s t) of
 --   Ty t -> return ([Bind "main" (Just $ Ty (substitute s t)) [] exp], substitute s t, s)
@@ -171,7 +172,7 @@ inferExp g (App e1 e2) =
     -- traceM ("exp2 in App is: " ++ show exp2)
     -- traceM ("type in App is : " ++ show (substitute unifier alpha))
     -- traceM ("subst in App is : " ++ show (unifier <> subst2 <> subst1))
-    return (allTypes (substQType (unifier <> subst2 <> subst1)) (App exp1 exp2), substitute unifier alpha, unifier <> subst2 <> subst1) --- what if e1 and e2 are qualtifier types
+    return (App exp1 exp2, substitute unifier alpha, unifier <> subst2 <> subst1) --- what if e1 and e2 are qualtifier types
 inferExp g (If e e1 e2) =
   do
     (exp, t, subst) <- inferExp g e
@@ -217,7 +218,7 @@ inferExp g (Recfun (Bind f maybeQtype [x] e)) = do
 
   let returnType = substitute unifier (Arrow (substitute subst alpha1) t)
   let returnSubst = unifier <> subst
-  let returnExp = allTypes (substQType returnSubst) $ Recfun (Bind f (Just (Ty returnType)) [x] exp)
+  let returnExp = Recfun (Bind f (Just (Ty returnType)) [x] exp)
 
   -- traceM ("maybeQtype in Recfun is: " ++ show maybeQtype)
   -- traceM ("returnType in Recfun is: " ++ show returnType)
@@ -235,12 +236,12 @@ inferExp g (Let [Bind v maybeVType [] body] e) = do
   (exp', t', subst') <- inferExp g' e
 
   let returnSubst = subst' <> subst
-  let returnExp = allTypes (substQType returnSubst) $ Let [Bind v (Just (Ty t)) [] exp] exp'
+  let returnExp = Let [Bind v (Just _t) [] exp] exp'
 
   -- traceM ("maybeQtype in Recfun is: " ++ show maybeQtype)
-  traceM ("returnType in Let is: " ++ show t')
-  traceM ("returnSubst in Let is: " ++ show returnSubst)
-  traceM ("generalisation in Let is: " ++ show _t)
+  -- traceM ("returnType in Let is: " ++ show t')
+  -- traceM ("returnSubst in Let is: " ++ show returnSubst)
+  -- traceM ("generalisation in Let is: " ++ show _t)
   -- traceM ("returnExp in Let is: " ++ show returnExp)
 
   return (returnExp, t', returnSubst) -- test this
