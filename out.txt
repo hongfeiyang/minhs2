@@ -40,7 +40,10 @@ CallStack (from HasCallStack):
 
 [1;97mRunning test: [0m[37mmain_tests/9_examples/5.mhs[0m[1;97m (worth 8) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
 [31mStderr was:[0m
-minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Num 1)] (Let [Bind "y" Nothing [] (Num 2)] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["z"] (Var "z")))] (If (App (Var "f") (Con "True")) (App (Con "Inl") (App (App (Prim Add) (Var "x")) (Var "y"))) (App (Con "Inr") (Var "x"))))))]
+minhs-2: [Bind "main" Nothing []
+  (Let [Bind "x" Nothing [] (Num 1)] 
+    (Let [Bind "y" Nothing [] (Num 2)]
+      (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["z"] (Var "z")))] (If (App (Var "f") (Con "True")) (App (Con "Inl") (App (App (Prim Add) (Var "x")) (Var "y"))) (App (Con "Inr") (Var "x"))))))]
 CallStack (from HasCallStack):
   error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
 
@@ -552,7 +555,10 @@ CallStack (from HasCallStack):
 
 [1;97mRunning test: [0m[37mmain_tests/5_let/2_application/002.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
 [31mStderr was:[0m
-minhs-2: [Bind "main" Nothing [] (Let [Bind "g" Nothing [] (Recfun (Bind "g'" Nothing ["x"] (App (App (Prim Mul) (Var "x")) (Var "x"))))] (Let [Bind "f" Nothing [] (Var "g")] (App (Var "g") (Num 7))))]
+minhs-2: 
+[Bind "main" Nothing [] 
+  (Let [Bind "g" Nothing [] 
+    (Recfun (Bind "g'" Nothing ["x"] (App (App (Prim Mul) (Var "x")) (Var "x"))))] (Let [Bind "f" Nothing [] (Var "g")] (App (Var "g") (Num 7))))]
 CallStack (from HasCallStack):
   error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
 
@@ -648,7 +654,11 @@ CallStack (from HasCallStack):
 
 [1;97mRunning test: [0m[37mmain_tests/5_let/0_simple/002.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
 [31mStderr was:[0m
-minhs-2: [Bind "main" Nothing [] (Let [Bind "x" Nothing [] (Num 1)] (Let [Bind "y" Nothing [] (Num 2)] (App (App (Prim Add) (Var "x")) (Var "y"))))]
+minhs-2: 
+[Bind "main" Nothing [] 
+  (Let [Bind "x" Nothing [] (Num 1)] 
+    (Let [Bind "y" Nothing [] (Num 2)] 
+      (App (App (Prim Add) (Var "x")) (Var "y"))))]
 CallStack (from HasCallStack):
   error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
 
@@ -672,7 +682,15 @@ CallStack (from HasCallStack):
 
 [1;97mRunning test: [0m[37mmain_tests/5_let/1_functions/005.mhs[0m[1;97m (worth 7) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
 [31mStderr was:[0m
-minhs-2: [Bind "main" Nothing [] (Let [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "f" Nothing ["x"] (Recfun (Bind "f" Nothing ["x"] (App (App (Prim Mul) (Num 2)) (Var "x"))))))))))))] (App (App (App (App (App (Var "f") (Num 0)) (Num 0)) (Num 0)) (Num 0)) (Num 7)))]
+minhs-2: [Bind "main" Nothing [] 
+  (Let [Bind "f" Nothing [] 
+    (Recfun (Bind "f" Nothing ["x"] 
+      (Recfun (Bind "f" Nothing ["x"] 
+        (Recfun (Bind "f" Nothing ["x"] 
+          (Recfun (Bind "f" Nothing ["x"] 
+            (Recfun (Bind "f" Nothing ["x"] 
+              (App (App (Prim Mul) (Num 2)) 
+                (Var "x"))))))))))))] (App (App (App (App (App (Var "f") (Num 0)) (Num 0)) (Num 0)) (Num 0)) (Num 7)))]
 CallStack (from HasCallStack):
   error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
 
@@ -968,7 +986,18 @@ CallStack (from HasCallStack):
 
 [1;97mRunning test: [0m[37mzz_more_tests/advanced_polymorphic/003.mhs[0m[1;97m (worth 1) :-  [0m[31mExecutable returned non-zero exit code(1).[0m
 [31mStderr was:[0m
-minhs-2: [Bind "main" Nothing [] (Let [Bind "g" Nothing [] (Recfun (Bind "f" Nothing ["x"] (If (Con "True") (Let [Bind "h" Nothing [] (Recfun (Bind "g" Nothing ["y"] (Var "x")))] (Var "h")) (Let [Bind "h" Nothing [] (Recfun (Bind "g" Nothing ["y"] (App (App (Prim Add) (Var "x")) (Num 1))))] (Var "h")))))] (Var "g"))]
+minhs-2: 
+[Bind "main" Nothing [] 
+  (Let [Bind "g" Nothing [] 
+    (Recfun (Bind "f" Nothing ["x"]  
+      (If 
+          (Con "True") 
+          (Let [Bind "h" Nothing [] (Recfun (Bind "g" Nothing ["y"] (Var "x")))] (Var "h"))
+          (Let [Bind "h" Nothing [] (Recfun (Bind "g" Nothing ["y"] (App (App (Prim Add) (Var "x")
+      ) 
+    (Num 1))))] 
+  (Var "h")))))] 
+(Var "g"))]
 CallStack (from HasCallStack):
   error, called at ./MinHS/TyInfer.hs:133:3 in main:MinHS.TyInfer
 

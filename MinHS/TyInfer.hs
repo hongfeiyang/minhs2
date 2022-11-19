@@ -118,55 +118,51 @@ unify (Arrow t11 t12) (Arrow t21 t22) =
     u2 <- unify t12 t22
     return (u1 <> u2)
 unify (TypeVar v) t
-  | elem v (tv t) = typeError $ OccursCheckFailed v t
+  | v `elem` tv t = typeError $ OccursCheckFailed v t
   | otherwise = return (v =: t)
 unify t (TypeVar v) = unify (TypeVar v) t
-unify x y = typeError $ MalformedAlternatives
+unify x y = typeError MalformedAlternatives
 
 generalise :: Gamma -> Type -> QType
-generalise g t =
-  let diff = (tv t) \\ (tvGamma g)
-   in foldl (\a -> \b -> Forall b a) (Ty t) diff
+generalise g t = let diff = tv t \\ tvGamma g in foldl (\a -> \b -> Forall b a) (Ty t) diff
 
 inferProgram :: Gamma -> Program -> TC (Program, Type, Subst)
-inferProgram env bs =
-  error $ show $ bs
-  
-  -- error
-  --   "implement me! don't forget to run the result substitution on the"
-  --   "entire expression using allTypes from Syntax.hs"
+inferProgram env [Bind name _ [] exp] = do
+  (e, t, s) <- inferExp env exp
+  case generalise env (substitute s t) of
+    Ty t -> return ([Bind "main" (Just $ Ty (substitute s t)) [] e], substitute s t, s)
+    t' -> return ([Bind "main" (Just t') [] e], substitute s t, s)
+inferProgram env bs = error "implement me! don't forget to run the result substitution on the entire expression using allTypes from Syntax.hs"
+
+-- error
+--   "implement me! don't forget to run the result substitution on the"
+--   "entire expression using allTypes from Syntax.hs"
 
 inferExp :: Gamma -> Exp -> TC (Exp, Type, Subst)
-
 inferExp g (Num n) = return (Num n, Base Int, emptySubst)
-
 inferExp g (Var i) =
   case E.lookup g i of
     Just v -> do
       v' <- unquantify v
       return (Var i, v', emptySubst)
     Nothing -> typeError $ NoSuchVariable i
-
 inferExp g (Con i) =
   case constType i of
     Just qtype -> do
       type' <- unquantify qtype
       return (Con i, type', emptySubst)
     Nothing -> typeError $ NoSuchConstructor i
-
 inferExp g (Prim op) =
   do
     type' <- unquantify (primOpType op)
     return (Prim op, type', emptySubst)
-
 inferExp g (App e1 e2) =
   do
     (exp1, t1, subst1) <- inferExp g e1
     (exp2, t2, subst2) <- inferExp (substGamma subst1 g) e2
     alpha <- fresh
     unifier <- unify (substitute subst2 t1) (Arrow t2 alpha)
-    return (App e1 e2, (substitute unifier alpha), unifier <> subst2 <> subst1) --- what if e1 and e2 are qualtifier types
-
+    return (App e1 e2, substitute unifier alpha, unifier <> subst2 <> subst1) --- what if e1 and e2 are qualtifier types
 inferExp g (If e e1 e2) =
   do
     (exp, t, subst) <- inferExp g e
@@ -174,33 +170,33 @@ inferExp g (If e e1 e2) =
     (exp1, t1, subst1) <- inferExp (substGamma (unifier <> subst) g) e1
     (exp2, t2, subst2) <- inferExp (substGamma (subst1 <> unifier <> subst) g) e2
     unifier' <- unify (substitute subst2 t1) t2
-    return (If e e1 e2, (substitute unifier' t2), unifier <> subst2 <> subst1 <> unifier <> subst)
+    return (If e e1 e2, substitute unifier' t2, unifier <> subst2 <> subst1 <> unifier <> subst)
 
 -- Note: this is the only case you need to handle for case expressions
 inferExp g (Case e [Alt "Inl" [x] e1, Alt "Inr" [y] e2]) = do
   (exp, t, subst) <- inferExp g e
   alphal <- fresh
-  (exp1, tl, subst1) <- inferExp (substGamma subst (E.add g ((x, Ty alphal)))) e1
+  (exp1, tl, subst1) <- inferExp (substGamma subst (E.add g (x, Ty alphal))) e1
   alphar <- fresh
-  (exp2, tr, subst2) <- inferExp (substGamma (subst <> subst1) (E.add g ((y, Ty alphar)))) e2
+  (exp2, tr, subst2) <- inferExp (substGamma (subst <> subst1) (E.add g (y, Ty alphar))) e2
   unifier <- unify (substitute (subst <> subst1 <> subst2) (alphal `Sum` alphar)) (substitute (subst1 <> subst2) t)
   unifier' <- unify (substitute (unifier <> subst2) tl) (substitute unifier tr)
-  return ((Case e [Alt "Inl" [x] e1, Alt "Inr" [y] e2]), (substitute (unifier <> unifier') tr), unifier' <> unifier <> subst2 <> subst1 <> subst)
+  return (Case e [Alt "Inl" [x] e1, Alt "Inr" [y] e2], substitute (unifier <> unifier') tr, unifier' <> unifier <> subst2 <> subst1 <> subst)
 inferExp g (Case e _) = typeError MalformedAlternatives
-
 inferExp g (Recfun (Bind f maybeQtype [x] e)) = do
   alpha1 <- fresh
   alpha2 <- fresh
   let g' = E.addAll g [(x, Ty alpha1), (f, Ty alpha2)]
   (exp, t, subst) <- inferExp g' e
   unifier <- unify (substitute subst alpha2) (Arrow (substitute subst alpha1) t)
-  return ((Recfun (Bind f maybeQtype [x] e)), substitute unifier (Arrow (substitute subst alpha1) t), unifier <> subst)
-inferExp g _ = error "Implement me!"
-
--- inferExp g (Let bindings e) =
-
-
-
+  return (Recfun (Bind f maybeQtype [x] e), substitute unifier (Arrow (substitute subst alpha1) t), unifier <> subst)
+inferExp g (Let [Bind v maybeVType [] body] e) = do
+  (exp, t, subst) <- inferExp g body
+  let _g = substGamma subst g
+  let _t = generalise _g t
+  let g' = E.add _g (v, _t)
+  (exp', t', subst') <- inferExp g' e
+  return (Let [Bind v maybeVType [] body] e, t', subst' <> subst) -- test this
 
 test :: TC (Exp, Type, Subst)
 -- test = inferExp initialGamma (Num 5)
@@ -211,7 +207,21 @@ test :: TC (Exp, Type, Subst)
 -- test =  inferExp (E.add  initialGamma ("a", primOpType Fst))  (Con "Inl")
 -- test =  inferExp (E.add  initialGamma ("a", primOpType Fst))  (Prim Add)
 -- test =  inferExp (E.add  initialGamma ("a", primOpType Fst))  (App (Prim Add) (Num 5))
-test = inferExp (E.add initialGamma ("a", primOpType Fst)) (App (Prim Add) (Num 5))
+-- test =
+--   inferExp
+--     initialGamma
+--     ( Let
+--         [Bind "x" (Just $ Ty $ Base Int) [] (Num 1)]
+--         ( Let
+--             [Bind "y" (Just $ Ty $ Base Int) [] (Num 2)]
+--             (App (App (Prim Add) (Var "x")) (Var "y"))
+--         )
+--     )
+
+test =
+  inferExp
+    initialGamma
+    (App (App (Prim Add) (Var "x")) (Var "y"))
 
 subTest :: TC (Exp, Type, Subst)
 subTest = do
@@ -222,7 +232,7 @@ generaliseTest :: QType
 generaliseTest = generalise (E.add initialGamma ("a", primOpType Fst)) (Arrow (TypeVar "A") (TypeVar "B"))
 
 diffTest' :: Gamma -> Type -> [Id]
-diffTest' g t = (tv t) \\ (tvGamma g)
+diffTest' g t = tv t \\ tvGamma g
 
 diffTest :: [Id]
 diffTest = diffTest' (E.add initialGamma ("A", primOpType Fst)) (TypeVar "A")
