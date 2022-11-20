@@ -205,7 +205,7 @@ inferExp g (Case e [Alt "Inl" [x] e1, Alt "Inr" [y] e2]) = do
   -- traceM ("exp1 in Case is: " ++ show exp1)
   -- traceM ("exp2 in Case is: " ++ show exp2)
 
-  return (Case e [Alt "Inl" [x] exp1, Alt "Inr" [y] exp2], substitute (unifier <> unifier') tr, unifier' <> unifier <> subst2 <> subst1 <> subst)
+  return (Case exp [Alt "Inl" [x] exp1, Alt "Inr" [y] exp2], substitute (unifier <> unifier') tr, unifier' <> unifier <> subst2 <> subst1 <> subst)
 inferExp g (Case e _) = typeError MalformedAlternatives
 --
 -- Recfun
@@ -228,24 +228,25 @@ inferExp g (Recfun (Bind f maybeQtype [x] e)) = do
   return (returnExp, returnType, returnSubst)
 
 -- Let
-inferExp g (Let [Bind v maybeVType [] body] e) = do
+inferExp g (Let bindings e) = do
+  (g', evaluatedBindings) <- addAllToEnv g bindings []
+  (exp', t', subst') <- inferExp g' e
+
+  -- traceM $ show g'
+  -- let returnSubst = subst' <> subst
+  -- let returnExp = Let [Bind v (Just _t) [] exp] exp'
+  return (Let evaluatedBindings exp', t', subst')
+
+addAllToEnv :: Gamma -> [Bind] -> [Bind] -> TC (Gamma, [Bind])
+addAllToEnv g [] r = return (g, reverse r)
+addAllToEnv g ((Bind v maybeVType args body) : xs) r = do
   (exp, t, subst) <- inferExp g body
   let _g = substGamma subst g
   let _t = generalise _g t
   let g' = E.add _g (v, _t)
-  (exp', t', subst') <- inferExp g' e
+  addAllToEnv g' xs (Bind v (Just _t) [] exp : r)
 
-  let returnSubst = subst' <> subst
-  let returnExp = Let [Bind v (Just _t) [] exp] exp'
-
-  -- traceM ("maybeQtype in Recfun is: " ++ show maybeQtype)
-  -- traceM ("returnType in Let is: " ++ show t')
-  -- traceM ("returnSubst in Let is: " ++ show returnSubst)
-  -- traceM ("generalisation in Let is: " ++ show _t)
-  -- traceM ("returnExp in Let is: " ++ show returnExp)
-
-  return (returnExp, t', returnSubst) -- test this
-inferExp g x = error ("Unknown expression: " ++ show x)
+-- inferExp g x = error ("Unknown expression: " ++ show x)
 
 test :: TC (Exp, Type, Subst)
 -- test = inferExp initialGamma (Num 5)
@@ -428,4 +429,62 @@ b =
       ],
       Arrow (TypeVar "a") (TypeVar "a"),
       [("b", Arrow (TypeVar "a") (TypeVar "a"))]
+    )
+
+inferProgramTest2 =
+  inferProgram
+    initialGamma
+    [ Bind
+        "main"
+        Nothing
+        []
+        ( Let
+            [Bind "x" Nothing [] (Num 1)]
+            ( Let
+                [ Bind "y" Nothing [] (Var "x"),
+                  Bind "x" Nothing [] (Con "True")
+                ]
+                (Var "y")
+            )
+        )
+    ]
+
+cOK =
+  Right
+    ( [ Bind
+          "main"
+          (Just (Ty (Base Int)))
+          []
+          ( Let
+              [Bind "x" (Just (Ty (Base Int))) [] (Num 1)]
+              ( Let
+                  [ Bind "y" (Just (Ty (Base Int))) [] (Var "x"),
+                    Bind "x" (Just (Ty (Base Bool))) [] (Con "True")
+                  ]
+                  (Var "y")
+              )
+          )
+      ],
+      Base Int,
+      []
+    )
+
+cNOK =
+  Right
+    ( [ Bind
+          "main"
+          (Just (Ty (Base Int)))
+          []
+          ( Let
+              [Bind "x" (Just (Ty (Base Int))) [] (Num 1)]
+              ( Let
+                  [ Bind "y" (Just (Ty (Base Int))) [] (Var "x"),
+                    Bind "x" (Just (Ty (Base Bool))) [] (Con "True")
+                  ]
+                  (Var "y")
+              )
+          )
+      ],
+      Base Int,
+      []
     )
