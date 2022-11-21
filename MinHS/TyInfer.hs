@@ -207,17 +207,21 @@ inferExp g (Case e [Alt "Inl" [x] e1, Alt "Inr" [y] e2]) = do
 inferExp g (Case e _) = typeError MalformedAlternatives
 --
 -- Recfun
-inferExp g (Recfun (Bind f maybeQtype [x] e)) = do
-  alpha1 <- fresh
+inferExp g (Recfun (Bind f maybeQtype args e)) = do
+  -- alpha1 <- fresh
+  argsBindings <- bindArgsToFreshTypeVar args []
   alpha2 <- fresh
 
-  let g' = E.addAll g [(x, Ty alpha1), (f, Ty alpha2)]
+  let argsQTypeBindings = map (\a -> (fst a, Ty $ snd a)) argsBindings
+  let g' = E.addAll g (argsQTypeBindings ++ [(f, Ty alpha2)])
   (exp, t, subst) <- inferExp g' e
-  unifier <- unify (substitute subst alpha2) (Arrow (substitute subst alpha1) t)
 
-  let returnType = substitute unifier (Arrow (substitute subst alpha1) t)
+  let functionType = foldl (\b a -> Arrow (substitute subst a) b) t (map snd argsBindings)
+  unifier <- unify (substitute subst alpha2) functionType
+
+  let returnType = substitute unifier functionType
   let returnSubst = unifier <> subst
-  let returnExp = Recfun (Bind f (Just (Ty returnType)) [x] exp)
+  let returnExp = Recfun (Bind f (Just (Ty returnType)) args exp)
 
   -- traceM ("g' in Recfun is: " ++ show g')
   -- traceM ("e in Recfun is: " ++ show e)
@@ -240,6 +244,12 @@ inferExp g (Let bindings e) = do
   -- let returnSubst = subst' <> subst
   -- let returnExp = Let [Bind v (Just _t) [] exp] exp'
   return (Let evaluatedBindings exp', t', subst' <> sub)
+
+bindArgsToFreshTypeVar :: [Id] -> [(Id, Type)] -> TC [(Id, Type)]
+bindArgsToFreshTypeVar [] bindings = return $ reverse bindings
+bindArgsToFreshTypeVar (id : ids) bindings = do
+  alpha <- fresh
+  bindArgsToFreshTypeVar ids ((id, alpha) : bindings)
 
 addAllToEnv :: Gamma -> Subst -> [Bind] -> [Bind] -> TC (Gamma, Subst, [Bind])
 addAllToEnv g sub [] r = return (g, sub, reverse r)
@@ -501,17 +511,14 @@ inferProgramTest3 =
         "main"
         Nothing
         []
-        ( Recfun
-            ( Bind
+        ( Let
+            [ Bind
                 "f"
                 Nothing
-                ["x"]
-                ( If
-                    (App (Prim Fst) (Var "x"))
-                    (App (Prim Fst) (Var "x"))
-                    (App (Prim Snd) (Var "x"))
-                )
-            )
+                []
+                (Recfun (Bind "f" Nothing ["x", "y"] (App (App (Prim Add) (Var "x")) (Var "y"))))
+            ]
+            (App (App (Var "f") (Num 1)) (Num 2))
         )
     ]
 
