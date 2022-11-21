@@ -173,22 +173,20 @@ inferExp g (App e1 e2) =
     -- traceM ("type in App is : " ++ show (substitute unifier alpha))
     -- traceM ("subst in App is : " ++ show (unifier <> subst2 <> subst1))
     return (App exp1 exp2, substitute unifier alpha, unifier <> subst2 <> subst1) --- what if e1 and e2 are qualtifier types
+
+--
+-- If
 inferExp g (If e e1 e2) =
   do
     (exp, t, subst) <- inferExp g e
     unifier <- unify t (Base Bool)
-    (exp1, t1, subst1) <- inferExp (substGamma (unifier <> subst) g) e1
-    (exp2, t2, subst2) <- inferExp (substGamma (subst1 <> unifier <> subst) g) e2
-    unifier' <- unify (substitute subst2 t1) t2
-
-    -- traceM ("e in If is: " ++ show e)
-    -- traceM ("e1 in If is: " ++ show e1)
-    -- traceM ("e2 in If is: " ++ show e2)
-    -- traceM ("exp in If is: " ++ show exp)
-    -- traceM ("exp1 in If is: " ++ show exp1)
-    -- traceM ("exp2 in If is: " ++ show exp2)
-
-    return (If exp exp1 exp2, substitute unifier' t2, unifier <> subst2 <> subst1 <> unifier <> subst)
+    case substitute (unifier <> subst) t of
+      Base Bool -> do
+        (exp1, t1, subst1) <- inferExp (substGamma (unifier <> subst) g) e1
+        (exp2, t2, subst2) <- inferExp (substGamma (subst1 <> unifier <> subst) g) e2
+        unifier' <- unify (substitute subst2 t1) t2
+        return (If exp exp1 exp2, substitute unifier' t2, unifier' <> unifier <> subst2 <> subst1 <> subst)
+      _ -> typeError $ TypeMismatch (Base Bool) t
 
 -- Note: this is the only case you need to handle for case expressions
 inferExp g (Case e [Alt "Inl" [x] e1, Alt "Inr" [y] e2]) = do
@@ -212,6 +210,7 @@ inferExp g (Case e _) = typeError MalformedAlternatives
 inferExp g (Recfun (Bind f maybeQtype [x] e)) = do
   alpha1 <- fresh
   alpha2 <- fresh
+
   let g' = E.addAll g [(x, Ty alpha1), (f, Ty alpha2)]
   (exp, t, subst) <- inferExp g' e
   unifier <- unify (substitute subst alpha2) (Arrow (substitute subst alpha1) t)
@@ -220,7 +219,12 @@ inferExp g (Recfun (Bind f maybeQtype [x] e)) = do
   let returnSubst = unifier <> subst
   let returnExp = Recfun (Bind f (Just (Ty returnType)) [x] exp)
 
-  -- traceM ("maybeQtype in Recfun is: " ++ show maybeQtype)
+  -- traceM ("g' in Recfun is: " ++ show g')
+  -- traceM ("e in Recfun is: " ++ show e)
+  -- traceM ("unifier right Prod type in Recfun is: " ++ show (substitute subst alpha1))
+  -- traceM ("unifier left in Recfun is: " ++ show (substitute subst alpha2))
+  -- traceM ("unifier right in Recfun is: " ++ show (Arrow (substitute subst alpha1) t))
+  -- traceM ("unifier in Recfun is: " ++ show unifier)
   -- traceM ("returnType in Recfun is: " ++ show returnType)
   -- traceM ("returnSubst in Recfun is: " ++ show returnSubst)
   -- traceM ("returnExp in Recfun is: " ++ show returnExp)
@@ -229,22 +233,22 @@ inferExp g (Recfun (Bind f maybeQtype [x] e)) = do
 
 -- Let
 inferExp g (Let bindings e) = do
-  (g', evaluatedBindings) <- addAllToEnv g bindings []
+  (g', sub, evaluatedBindings) <- addAllToEnv g emptySubst bindings []
   (exp', t', subst') <- inferExp g' e
 
   -- traceM $ show g'
   -- let returnSubst = subst' <> subst
   -- let returnExp = Let [Bind v (Just _t) [] exp] exp'
-  return (Let evaluatedBindings exp', t', subst')
+  return (Let evaluatedBindings exp', t', subst' <> sub)
 
-addAllToEnv :: Gamma -> [Bind] -> [Bind] -> TC (Gamma, [Bind])
-addAllToEnv g [] r = return (g, reverse r)
-addAllToEnv g ((Bind v maybeVType args body) : xs) r = do
+addAllToEnv :: Gamma -> Subst -> [Bind] -> [Bind] -> TC (Gamma, Subst, [Bind])
+addAllToEnv g sub [] r = return (g, sub, reverse r)
+addAllToEnv g sub ((Bind v maybeVType args body) : xs) r = do
   (exp, t, subst) <- inferExp g body
   let _g = substGamma subst g
   let _t = generalise _g t
   let g' = E.add _g (v, _t)
-  addAllToEnv g' xs (Bind v (Just _t) [] exp : r)
+  addAllToEnv g' (subst <> sub) xs (Bind v (Just $ generalise g' t) args exp : r)
 
 -- inferExp g x = error ("Unknown expression: " ++ show x)
 
@@ -295,6 +299,7 @@ inferProgramTest =
         )
     ]
 
+unexpectResult :: Either a ([Bind], Type, [(String, Type)])
 unexpectResult =
   Right
     ( [ Bind
@@ -441,8 +446,8 @@ inferProgramTest2 =
         ( Let
             [Bind "x" Nothing [] (Num 1)]
             ( Let
-                [ Bind "y" Nothing [] (Var "x"),
-                  Bind "x" Nothing [] (Con "True")
+                [ Bind "y" Nothing [] (Var "z"),
+                  Bind "z" Nothing [] (Var "x")
                 ]
                 (Var "y")
             )
@@ -488,3 +493,37 @@ cNOK =
       Base Int,
       []
     )
+
+inferProgramTest3 =
+  inferProgram
+    initialGamma
+    [ Bind
+        "main"
+        Nothing
+        []
+        ( Recfun
+            ( Bind
+                "f"
+                Nothing
+                ["x"]
+                ( If
+                    (App (Prim Fst) (Var "x"))
+                    (App (Prim Fst) (Var "x"))
+                    (App (Prim Snd) (Var "x"))
+                )
+            )
+        )
+    ]
+
+subc =
+  [ ("c", Base Bool),
+    ("i", Base Bool),
+    ("g", TypeVar "j"),
+    ("k", TypeVar "j"),
+    ("f", Base Bool),
+    ("d", TypeVar "j"),
+    ("h", Base Bool),
+    ("c", Base Bool),
+    ("a", Prod (Base Bool) (TypeVar "j")),
+    ("e", Base Bool)
+  ]
