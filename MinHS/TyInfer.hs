@@ -1,7 +1,7 @@
 module MinHS.TyInfer where
 
 import Data.Foldable (foldMap)
-import Data.List (nub, union, (\\))
+import Data.List (elemIndex, find, nub, sortBy, union, (\\))
 import Data.Monoid (Monoid (..), (<>))
 import Debug.Trace
 import qualified MinHS.Env as E
@@ -245,6 +245,18 @@ inferExp g (Let bindings e) = do
   -- let returnExp = Let [Bind v (Just _t) [] exp] exp'
   return (Let evaluatedBindings exp', t', subst' <> sub)
 
+--
+-- Letrec
+inferExp g (Letrec bindings e) = do
+  (g', sub, evaluatedBindings) <- addAllToEnv2 g emptySubst bindings []
+  let orderedEvaluatedBindings = restoreBindOrder evaluatedBindings bindings
+  (exp', t', subst') <- inferExp g' e
+
+  -- traceM $ show g'
+  -- let returnSubst = subst' <> subst
+  -- let returnExp = Let [Bind v (Just _t) [] exp] exp'
+  return (Letrec orderedEvaluatedBindings exp', t', subst' <> sub)
+
 bindArgsToFreshTypeVar :: [Id] -> [(Id, Type)] -> TC [(Id, Type)]
 bindArgsToFreshTypeVar [] bindings = return $ reverse bindings
 bindArgsToFreshTypeVar (id : ids) bindings = do
@@ -260,7 +272,47 @@ addAllToEnv g sub ((Bind v maybeVType args body) : xs) r = do
   let g' = E.add _g (v, _t)
   addAllToEnv g' (subst <> sub) xs (Bind v (Just $ generalise g' t) args exp : r)
 
--- inferExp g x = error ("Unknown expression: " ++ show x)
+addAllToEnv2 g sub [] r = return (g, sub, reverse r)
+addAllToEnv2 g sub ((Bind v maybeVType args body) : xs) r = do
+  -- (exp, t, subst) <- inferExp g body
+  -- traceM $ show (Bind v maybeVType args body : xs)
+  -- traceM $ show sub
+  case runTC $ inferExp g body of
+    Left (NoSuchVariable _) -> addAllToEnv2 g sub (xs ++ [Bind v maybeVType args body]) r
+    _ -> do
+      (exp, t, subst) <- inferExp g body
+      let _g = substGamma subst g
+          _t = generalise _g t
+          g' = E.add _g (v, _t)
+       in addAllToEnv2 g' (subst <> sub) xs (Bind v (Just $ generalise g' t) args exp : r)
+
+restoreBindOrder :: [Bind] -> [Bind] -> [Bind]
+restoreBindOrder xs ys =
+  sortBy (\a b -> getOrder a b ys) xs
+
+getOrder :: Bind -> Bind -> [Bind] -> Ordering
+getOrder a b ys = case getOrder' a b ys of
+  Just o -> o
+  Nothing -> error "ERROR"
+
+getOrder' :: Bind -> Bind -> [Bind] -> Maybe Ordering
+getOrder' (Bind a _ _ _) (Bind b _ _ _) ys = do
+  aInys <- find (\(Bind n' _ _ _) -> n' == a) ys
+  aIndex <- elemIndex aInys ys
+
+  bInys <- find (\(Bind n' _ _ _) -> n' == b) ys
+  bIndex <- elemIndex bInys ys
+
+  if aIndex >= bIndex
+    then
+      if aIndex > bIndex
+        then return GT
+        else return EQ
+    else return LT
+
+-- \| elemIndex (find a) ys > elemIndex b ys = GT
+-- \| elemIndex a ys < elemIndex b ys = LT
+-- \| otherwise = EQ
 
 test :: TC (Exp, Type, Subst)
 -- test = inferExp initialGamma (Num 5)
@@ -522,15 +574,18 @@ inferProgramTest3 =
         )
     ]
 
-subc =
-  [ ("c", Base Bool),
-    ("i", Base Bool),
-    ("g", TypeVar "j"),
-    ("k", TypeVar "j"),
-    ("f", Base Bool),
-    ("d", TypeVar "j"),
-    ("h", Base Bool),
-    ("c", Base Bool),
-    ("a", Prod (Base Bool) (TypeVar "j")),
-    ("e", Base Bool)
-  ]
+inferProgramTest4 =
+  inferProgram
+    initialGamma
+    [ Bind
+        "main"
+        (Just (Ty (Base Int)))
+        []
+        ( Letrec
+            [ Bind "a" (Just (Ty (Base Int))) [] (Var "b"),
+              Bind "b" (Just (Ty (Base Int))) [] (Var "c"),
+              Bind "c" (Just (Ty (Base Int))) [] (Num 7)
+            ]
+            (App (App (Prim Add) (Var "c")) (Var "a"))
+        )
+    ]
