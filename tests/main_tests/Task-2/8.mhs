@@ -1,0 +1,1 @@
+main :: forall a. forall b. (a -> b -> b) = (recfun f :: (Bool -> Int -> Int) x y = y);

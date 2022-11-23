@@ -1,0 +1,1 @@
+main :: (Bool -> Int -> () -> Int) = (recfun f x y z = y);
