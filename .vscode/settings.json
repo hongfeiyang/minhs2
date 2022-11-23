@@ -1,4 +1,0 @@
-{
-    "haskell.formattingProvider": "ormolu",
-    "editor.formatOnSave": true
-}
