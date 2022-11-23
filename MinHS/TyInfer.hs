@@ -128,19 +128,25 @@ generalise :: Gamma -> Type -> QType
 generalise g t = let diff = tv t \\ tvGamma g in foldl (flip Forall) (Ty t) diff
 
 inferProgram :: Gamma -> Program -> TC (Program, Type, Subst)
-inferProgram g [Bind name _ [] e] = do
+inferProgram g [Bind name maybeGivenQType [] e] = do
   (exp, t, subst) <- inferExp g e
-  let allTypedExp = allTypes (substQType subst) exp
-  return ([Bind "main" (Just $ generalise g t) [] allTypedExp], t, subst)
-
--- case generalise g (substitute s t) of
---   Ty t -> return ([Bind "main" (Just $ Ty (substitute s t)) [] exp], substitute s t, s)
---   t' -> return ([Bind "main" (Just t') [] exp], substitute s t, s)
+  case maybeGivenQType of
+    -- handle user supplied type
+    -- for now this program is not able to handle situations where user supplied a forall type but we
+    -- figure out the type should be more restricting, but it is able to handle the other way around
+    Just givenQType -> do
+      givenType <- unquantify givenQType
+      case runTC (unify t givenType) of
+        Right unifier -> do
+          let returnSubst = subst <> unifier
+          let allTypedExp = allTypes (substQType returnSubst) exp
+          let returnType = substitute returnSubst t
+          return ([Bind "main" (Just $ generalise g returnType) [] allTypedExp], returnType, returnSubst)
+        Left err -> error $ show err
+    Nothing -> do
+      let allTypedExp = allTypes (substQType subst) exp
+      return ([Bind "main" (Just $ generalise g t) [] allTypedExp], t, subst)
 inferProgram env bs = error "implement me! don't forget to run the result substitution on the entire expression using allTypes from Syntax.hs"
-
--- error
---   "implement me! don't forget to run the result substitution on the"
---   "entire expression using allTypes from Syntax.hs"
 
 inferExp :: Gamma -> Exp -> TC (Exp, Type, Subst)
 inferExp g (Num n) = return (Num n, Base Int, emptySubst)
@@ -166,13 +172,7 @@ inferExp g (App e1 e2) =
     (exp2, t2, subst2) <- inferExp (substGamma subst1 g) e2
     alpha <- fresh
     unifier <- unify (substitute subst2 t1) (Arrow t2 alpha)
-    -- traceM ("e1 in App is: " ++ show e1)
-    -- traceM ("e2 in App is: " ++ show e2)
-    -- traceM ("exp1 in App is: " ++ show exp1)
-    -- traceM ("exp2 in App is: " ++ show exp2)
-    -- traceM ("type in App is : " ++ show (substitute unifier alpha))
-    -- traceM ("subst in App is : " ++ show (unifier <> subst2 <> subst1))
-    return (App exp1 exp2, substitute unifier alpha, unifier <> subst2 <> subst1) --- what if e1 and e2 are qualtifier types
+    return (App exp1 exp2, substitute unifier alpha, unifier <> subst2 <> subst1)
 
 --
 -- If
@@ -197,395 +197,107 @@ inferExp g (Case e [Alt "Inl" [x] e1, Alt "Inr" [y] e2]) = do
   (exp2, tr, subst2) <- inferExp (substGamma (subst <> subst1) (E.add g (y, Ty alphar))) e2
   unifier <- unify (substitute (subst <> subst1 <> subst2) (alphal `Sum` alphar)) (substitute (subst1 <> subst2) t)
   unifier' <- unify (substitute (unifier <> subst2) tl) (substitute unifier tr)
-
-  -- traceM ("e1 in Case is: " ++ show e1)
-  -- traceM ("e2 in Case is: " ++ show e2)
-  -- traceM ("exp1 in Case is: " ++ show exp1)
-  -- traceM ("exp2 in Case is: " ++ show exp2)
-
   return (Case exp [Alt "Inl" [x] exp1, Alt "Inr" [y] exp2], substitute (unifier <> unifier') tr, unifier' <> unifier <> subst2 <> subst1 <> subst)
 inferExp g (Case e _) = typeError MalformedAlternatives
 --
 -- Recfun
-inferExp g (Recfun (Bind f maybeQtype args e)) = do
-  -- alpha1 <- fresh
-  argsBindings <- bindArgsToFreshTypeVar args []
+inferExp g (Recfun (Bind f maybeGivenQType args e)) = do
+  -- alpha1 <- fresh (as in if recfun only have one argument)
+  argsBindings <- bindArgsToFreshTypeVar args [] -- for multiple arguments
   alpha2 <- fresh
 
   let argsQTypeBindings = map (\a -> (fst a, Ty $ snd a)) argsBindings
   let g' = E.addAll g (argsQTypeBindings ++ [(f, Ty alpha2)])
   (exp, t, subst) <- inferExp g' e
 
-  let functionType = foldl (\b a -> Arrow (substitute subst a) b) t (map snd argsBindings)
-  unifier <- unify (substitute subst alpha2) functionType
-
-  let returnType = substitute unifier functionType
-  let returnSubst = unifier <> subst
-  let returnExp = Recfun (Bind f (Just (Ty returnType)) args exp)
-
-  -- traceM ("g' in Recfun is: " ++ show g')
-  -- traceM ("e in Recfun is: " ++ show e)
-  -- traceM ("unifier right Prod type in Recfun is: " ++ show (substitute subst alpha1))
-  -- traceM ("unifier left in Recfun is: " ++ show (substitute subst alpha2))
-  -- traceM ("unifier right in Recfun is: " ++ show (Arrow (substitute subst alpha1) t))
-  -- traceM ("unifier in Recfun is: " ++ show unifier)
-  -- traceM ("returnType in Recfun is: " ++ show returnType)
-  -- traceM ("returnSubst in Recfun is: " ++ show returnSubst)
-  -- traceM ("returnExp in Recfun is: " ++ show returnExp)
-
-  return (returnExp, returnType, returnSubst)
+  case maybeGivenQType of
+    Just givenQType -> do
+      -- user supplied a type, we need to see if this type is <= than our current type that we figured out,
+      -- if it is then we use user supplied type, e.g. we figured out the type should be `forall a. a` but user wants to
+      -- limit this to `Bool`, we must comply with user's preference and procceed with `a` replaced by `Bool`
+      givenType <- unquantify givenQType
+      (returnExp, returnType, returnSubst) <- getFuncReturnType givenType subst t argsBindings exp
+      return (returnExp, returnType, returnSubst)
+    Nothing -> do
+      -- otherwise we figure out a type ourselves
+      (returnExp, returnType, returnSubst) <- getFuncReturnType alpha2 subst t argsBindings exp
+      return (returnExp, returnType, returnSubst)
+  where
+    getFuncReturnType givenType subst t argsBindings exp = do
+      let functionType = foldr (\a b -> Arrow (substitute subst a) b) t (map snd argsBindings)
+      unifier <- unify (substitute subst givenType) functionType
+      let returnType = substitute unifier functionType
+      let returnSubst = unifier <> subst
+      let returnExp = Recfun (Bind f (Just (Ty returnType)) args exp)
+      return (returnExp, returnType, returnSubst)
 
 -- Let
 inferExp g (Let bindings e) = do
-  (g', sub, evaluatedBindings) <- addAllToEnv g emptySubst bindings []
+  (g', sub, evaluatedBindings) <- evaluateAndAddAllBindingsToGammaOfLet g emptySubst bindings []
   (exp', t', subst') <- inferExp g' e
-
-  -- traceM $ show g'
-  -- let returnSubst = subst' <> subst
-  -- let returnExp = Let [Bind v (Just _t) [] exp] exp'
   return (Let evaluatedBindings exp', t', subst' <> sub)
 
 --
 -- Letrec
 inferExp g (Letrec bindings e) = do
-  (g', sub, evaluatedBindings) <- addAllToEnv2 g emptySubst bindings []
+  (g', sub, evaluatedBindings) <- evaluateAndAddAllBindingsToGammaOfLetrec g emptySubst bindings []
   let orderedEvaluatedBindings = restoreBindOrder evaluatedBindings bindings
   (exp', t', subst') <- inferExp g' e
-
-  -- traceM $ show g'
-  -- let returnSubst = subst' <> subst
-  -- let returnExp = Let [Bind v (Just _t) [] exp] exp'
   return (Letrec orderedEvaluatedBindings exp', t', subst' <> sub)
 
+--
+-- support for multiple arguments in Bind
+-- basically generate fresh typevars for all arguments of a function
 bindArgsToFreshTypeVar :: [Id] -> [(Id, Type)] -> TC [(Id, Type)]
 bindArgsToFreshTypeVar [] bindings = return $ reverse bindings
 bindArgsToFreshTypeVar (id : ids) bindings = do
   alpha <- fresh
   bindArgsToFreshTypeVar ids ((id, alpha) : bindings)
 
-addAllToEnv :: Gamma -> Subst -> [Bind] -> [Bind] -> TC (Gamma, Subst, [Bind])
-addAllToEnv g sub [] r = return (g, sub, reverse r)
-addAllToEnv g sub ((Bind v maybeVType args body) : xs) r = do
+--
+-- multiple bindings add to Gamma,
+evaluateAndAddAllBindingsToGammaOfLet :: Gamma -> Subst -> [Bind] -> [Bind] -> TC (Gamma, Subst, [Bind])
+evaluateAndAddAllBindingsToGammaOfLet g sub [] r = return (g, sub, reverse r)
+evaluateAndAddAllBindingsToGammaOfLet g sub ((Bind v maybeGivenQType args body) : xs) r = do
   (exp, t, subst) <- inferExp g body
   let _g = substGamma subst g
   let _t = generalise _g t
   let g' = E.add _g (v, _t)
-  addAllToEnv g' (subst <> sub) xs (Bind v (Just $ generalise g' t) args exp : r)
+  evaluateAndAddAllBindingsToGammaOfLet g' (subst <> sub) xs (Bind v (Just $ generalise g' t) args exp : r)
 
-addAllToEnv2 g sub [] r = return (g, sub, reverse r)
-addAllToEnv2 g sub ((Bind v maybeVType args body) : xs) r = do
-  -- (exp, t, subst) <- inferExp g body
-  -- traceM $ show (Bind v maybeVType args body : xs)
-  -- traceM $ show sub
+evaluateAndAddAllBindingsToGammaOfLetrec g sub [] r = return (g, sub, reverse r)
+evaluateAndAddAllBindingsToGammaOfLetrec g sub ((Bind v maybeVType args body) : xs) r = do
   case runTC $ inferExp g body of
-    Left (NoSuchVariable _) -> addAllToEnv2 g sub (xs ++ [Bind v maybeVType args body]) r
+    -- only difference here is that if we have a unknown var that cannot be resolved of its type, we move it to the end
+    -- and (hopefully) resolve other vars first to know this var's type
+    Left (NoSuchVariable _) -> evaluateAndAddAllBindingsToGammaOfLetrec g sub (xs ++ [Bind v maybeVType args body]) r
     _ -> do
       (exp, t, subst) <- inferExp g body
       let _g = substGamma subst g
           _t = generalise _g t
           g' = E.add _g (v, _t)
-       in addAllToEnv2 g' (subst <> sub) xs (Bind v (Just $ generalise g' t) args exp : r)
+       in evaluateAndAddAllBindingsToGammaOfLetrec g' (subst <> sub) xs (Bind v (Just $ generalise g' t) args exp : r)
 
+-- restore the ordering of our re-ordered bindings (first argument)
+-- to the original ordering (second argument) in letrec
 restoreBindOrder :: [Bind] -> [Bind] -> [Bind]
 restoreBindOrder xs ys =
-  sortBy (\a b -> getOrder a b ys) xs
+  sortBy (\a b -> compareBindByIndexInList a b ys) xs
 
-getOrder :: Bind -> Bind -> [Bind] -> Ordering
-getOrder a b ys = case getOrder' a b ys of
+compareBindByIndexInList :: Bind -> Bind -> [Bind] -> Ordering
+compareBindByIndexInList a b ys = case compareBindByIndexInList' a b ys of
   Just o -> o
-  Nothing -> error "ERROR"
+  Nothing -> error "List sizes and binding names are different"
 
-getOrder' :: Bind -> Bind -> [Bind] -> Maybe Ordering
-getOrder' (Bind a _ _ _) (Bind b _ _ _) ys = do
+compareBindByIndexInList' :: Bind -> Bind -> [Bind] -> Maybe Ordering
+compareBindByIndexInList' (Bind a _ _ _) (Bind b _ _ _) ys = do
   aInys <- find (\(Bind n' _ _ _) -> n' == a) ys
   aIndex <- elemIndex aInys ys
-
   bInys <- find (\(Bind n' _ _ _) -> n' == b) ys
   bIndex <- elemIndex bInys ys
-
   if aIndex >= bIndex
     then
       if aIndex > bIndex
         then return GT
         else return EQ
     else return LT
-
--- \| elemIndex (find a) ys > elemIndex b ys = GT
--- \| elemIndex a ys < elemIndex b ys = LT
--- \| otherwise = EQ
-
-test :: TC (Exp, Type, Subst)
--- test = inferExp initialGamma (Num 5)
--- test =  inferExp (E.add  initialGamma ("a", Ty $ Base Unit ) )  (Var "a")
--- test =  inferExp (E.add  initialGamma ("a", primOpType Fst))  (Var "a")
--- test =  inferExp (E.add  initialGamma ("a", primOpType Fst))  (Con "()")
--- test =  inferExp (E.add  initialGamma ("a", primOpType Fst))  (Con "Pair")
--- test =  inferExp (E.add  initialGamma ("a", primOpType Fst))  (Con "Inl")
--- test =  inferExp (E.add  initialGamma ("a", primOpType Fst))  (Prim Add)
--- test =  inferExp (E.add  initialGamma ("a", primOpType Fst))  (App (Prim Add) (Num 5))
--- test =
---   inferExp
---     (E.addAll initialGamma [("x", Ty $ Base Int), ("y", Ty $ Base Int)])
---     (App (App (Prim Add) (Var "x")) (Var "y"))
-test =
-  inferExp
-    initialGamma
-    ( Let
-        [Bind "x" (Just $ Ty $ Base Int) [] (Num 1)]
-        ( Let
-            [Bind "y" (Just $ Ty $ Base Int) [] (Num 2)]
-            (App (App (Prim Add) (Var "x")) (Var "y"))
-        )
-    )
-
-inferProgramTest =
-  inferProgram
-    initialGamma
-    [ Bind
-        "main"
-        Nothing
-        []
-        ( Let
-            [Bind "x" Nothing [] (Num 1)]
-            ( Let
-                [Bind "y" Nothing [] (Num 2)]
-                ( Let
-                    [Bind "f" Nothing [] (Recfun (Bind "f" Nothing ["z"] (Var "z")))]
-                    ( If
-                        (App (Var "f") (Con "True"))
-                        (App (Con "Inl") (App (App (Prim Add) (Var "x")) (Var "y")))
-                        (App (Con "Inr") (Var "x"))
-                    )
-                )
-            )
-        )
-    ]
-
-unexpectResult :: Either a ([Bind], Type, [(String, Type)])
-unexpectResult =
-  Right
-    ( [ Bind
-          "main"
-          (Just (Ty (Sum (Base Int) (Base Int))))
-          []
-          ( Let
-              [ Bind
-                  "x"
-                  (Just (Ty (Base Int)))
-                  []
-                  (Num 1)
-              ]
-              ( Let
-                  [Bind "y" (Just (Ty (Base Int))) [] (Num 2)]
-                  ( Let
-                      [ Bind
-                          "f"
-                          (Just (Ty (Arrow (TypeVar "a") (TypeVar "a"))))
-                          []
-                          (Recfun (Bind "f" (Just (Ty (Arrow (TypeVar "a") (TypeVar "a")))) ["z"] (Var "z")))
-                      ]
-                      (If (App (Var "f") (Con "True")) (App (Con "Inl") (App (App (Prim Add) (Var "x")) (Var "y"))) (App (Con "Inr") (Var "x")))
-                  )
-              )
-          )
-      ],
-      Sum (Base Int) (Base Int),
-      [ ("k", Base Int),
-        ("l", Sum (TypeVar "j") (Base Int)),
-        ("e", Base Int),
-        ("i", Sum (Base Int) (TypeVar "f")),
-        ("h", Base Int),
-        ("g", Arrow (Base Int) (Base Int)),
-        ("c", Base Bool),
-        ("d", Base Bool),
-        ("b", Arrow (TypeVar "a") (TypeVar "a"))
-      ]
-    )
-
-expectedResult =
-  Right
-    ( [ Bind
-          "main"
-          (Just (Ty (Sum (Base Int) (Base Int))))
-          []
-          ( Let
-              [Bind "x" (Just (Ty (Base Int))) [] (Num 1)]
-              ( Let
-                  [Bind "y" (Just (Ty (Base Int))) [] (Num 2)]
-                  ( Let
-                      [ Bind
-                          "f"
-                          (Just (Forall "a" (Ty (Arrow (TypeVar "a") (TypeVar "a")))))
-                          []
-                          (Recfun (Bind "f" (Just (Ty (Arrow (TypeVar "a") (TypeVar "a")))) ["z"] (Var "z")))
-                      ]
-                      ( If
-                          (App (Var "f") (Con "True"))
-                          (App (Con "Inl") (App (App (Prim Add) (Var "x")) (Var "y")))
-                          (App (Con "Inr") (Var "x"))
-                      )
-                  )
-              )
-          )
-      ],
-      Sum (Base Int) (Base Int),
-      [ ("b", Arrow (TypeVar "a") (TypeVar "a")),
-        ("j", Base Int),
-        ("f", Base Int),
-        ("k", Base Int),
-        ("l", Sum (Base Int) (Base Int)),
-        ("e", Base Int),
-        ("i", Sum (Base Int) (Base Int)),
-        ("h", Base Int),
-        ("g", Arrow (Base Int) (Base Int)),
-        ("c", Base Bool),
-        ("d", Base Bool)
-      ]
-    )
-
-subTest :: TC (Exp, Type, Subst)
-subTest = do
-  sub <- unify (Arrow (Base Int) (Arrow (Base Int) (Base Int))) (Arrow (Base Int) (TypeVar "X"))
-  return (Num 1, Base Int, sub)
-
-generaliseTest :: QType
-generaliseTest = generalise (E.add initialGamma ("a", primOpType Fst)) (Arrow (TypeVar "A") (TypeVar "B"))
-
-diffTest' :: Gamma -> Type -> [Id]
-diffTest' g t = tv t \\ tvGamma g
-
-diffTest :: [Id]
-diffTest = diffTest' (E.add initialGamma ("A", primOpType Fst)) (TypeVar "A")
-
-subTest2 = do
-  sub <- unify (Arrow (Base Int) (Base Int)) (TypeVar "X")
-  return (Num 1, Base Int, sub)
-
-runTest :: TC a -> Either TypeError a
-runTest = runTC
-
-inferProgramTest1 =
-  inferProgram
-    initialGamma
-    [ Bind
-        "main"
-        Nothing
-        []
-        (Let [Bind "x" Nothing [] (Con "True"), Bind "y" Nothing [] (Num 1), Bind "z" Nothing [] (Con "()")] (Var "x"))
-    ]
-
-a =
-  Right
-    ( [ Bind
-          "main"
-          (Just (Forall "a" (Ty (Arrow (TypeVar "a") (TypeVar "a")))))
-          []
-          (Recfun (Bind "f" (Just (Ty (Arrow (TypeVar "a") (TypeVar "a")))) ["z"] (Var "z")))
-      ],
-      Arrow (TypeVar "a") (TypeVar "a"),
-      [("b", Arrow (TypeVar "a") (TypeVar "a"))]
-    )
-
-b =
-  Right
-    ( [ Bind
-          "main"
-          (Just (Forall "a" (Ty (Arrow (TypeVar "a") (TypeVar "a")))))
-          []
-          (Recfun (Bind "f" (Just (Ty (Arrow (TypeVar "a") (TypeVar "a")))) ["z"] (Var "z")))
-      ],
-      Arrow (TypeVar "a") (TypeVar "a"),
-      [("b", Arrow (TypeVar "a") (TypeVar "a"))]
-    )
-
-inferProgramTest2 =
-  inferProgram
-    initialGamma
-    [ Bind
-        "main"
-        Nothing
-        []
-        ( Let
-            [Bind "x" Nothing [] (Num 1)]
-            ( Let
-                [ Bind "y" Nothing [] (Var "z"),
-                  Bind "z" Nothing [] (Var "x")
-                ]
-                (Var "y")
-            )
-        )
-    ]
-
-cOK =
-  Right
-    ( [ Bind
-          "main"
-          (Just (Ty (Base Int)))
-          []
-          ( Let
-              [Bind "x" (Just (Ty (Base Int))) [] (Num 1)]
-              ( Let
-                  [ Bind "y" (Just (Ty (Base Int))) [] (Var "x"),
-                    Bind "x" (Just (Ty (Base Bool))) [] (Con "True")
-                  ]
-                  (Var "y")
-              )
-          )
-      ],
-      Base Int,
-      []
-    )
-
-cNOK =
-  Right
-    ( [ Bind
-          "main"
-          (Just (Ty (Base Int)))
-          []
-          ( Let
-              [Bind "x" (Just (Ty (Base Int))) [] (Num 1)]
-              ( Let
-                  [ Bind "y" (Just (Ty (Base Int))) [] (Var "x"),
-                    Bind "x" (Just (Ty (Base Bool))) [] (Con "True")
-                  ]
-                  (Var "y")
-              )
-          )
-      ],
-      Base Int,
-      []
-    )
-
-inferProgramTest3 =
-  inferProgram
-    initialGamma
-    [ Bind
-        "main"
-        Nothing
-        []
-        ( Let
-            [ Bind
-                "f"
-                Nothing
-                []
-                (Recfun (Bind "f" Nothing ["x", "y"] (App (App (Prim Add) (Var "x")) (Var "y"))))
-            ]
-            (App (App (Var "f") (Num 1)) (Num 2))
-        )
-    ]
-
-inferProgramTest4 =
-  inferProgram
-    initialGamma
-    [ Bind
-        "main"
-        (Just (Ty (Base Int)))
-        []
-        ( Letrec
-            [ Bind "a" (Just (Ty (Base Int))) [] (Var "b"),
-              Bind "b" (Just (Ty (Base Int))) [] (Var "c"),
-              Bind "c" (Just (Ty (Base Int))) [] (Num 7)
-            ]
-            (App (App (Prim Add) (Var "c")) (Var "a"))
-        )
-    ]

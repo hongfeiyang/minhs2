@@ -1,0 +1,5 @@
+main
+     = let x = True;
+           y = 1;
+           f = (recfun g :: (Bool -> Int -> Bool * Int) x y = (x, y));
+       in f x y;
