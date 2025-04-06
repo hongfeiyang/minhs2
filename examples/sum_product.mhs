@@ -1,0 +1,29 @@
+-- Sum and product types in MinHS
+-- This example demonstrates algebraic data types
+
+-- Function to create a pair (product type)
+makePair x y = Pair x y;
+
+-- Function to extract first component of a pair
+first p = case p of {
+  Pair x y -> x;
+};
+
+-- Function to extract second component of a pair
+second p = case p of {
+  Pair x y -> y;
+};
+
+-- Function that works with sum types
+processEither e = case e of {
+  Inl n -> n + 1;
+  Inr b -> if b then 1 else 0;
+};
+
+-- Main function demonstrating both product and sum types
+main = 
+  let p = makePair 5 10;
+      sum = first p + second p;
+      choice = Inl sum;
+      result = processEither choice;
+  in result; 

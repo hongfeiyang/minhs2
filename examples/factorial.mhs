@@ -1,0 +1,10 @@
+-- Factorial calculator in MinHS
+-- This example demonstrates recursion, if expressions, and arithmetic
+
+-- Calculate factorial of n
+factorial n = if (n == 0)
+                then 1
+                else (n * (factorial (n - 1)));
+
+-- Main function to calculate factorial of 5
+main = factorial 5; 

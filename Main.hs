@@ -1,3 +1,11 @@
+-- |
+-- Module      : Main
+-- Description : Entry point for the MinHS2 interpreter
+-- Copyright   : (c) Liam O'Connor, UNSW
+--
+-- The MinHS2 interpreter main program. This module provides the command-line
+-- interface and ties together the parsing, type checking, and evaluation
+-- components of the interpreter.
 import MinHS.Parse
 import MinHS.Syntax
 import MinHS.TyInfer
@@ -11,11 +19,15 @@ import Options.Applicative.Types
 
 import Text.PrettyPrint.ANSI.Leijen (Pretty (..),Doc, putDoc, plain)
 import Data.Monoid
+
+-- | Action type representing a step in the interpreter pipeline
 type Action a b = a -> Either (IO ()) b
 
+-- | Monoid append operator alias
 (<^>) :: (Monoid a) => a -> a -> a
 (<^>) = mappend
 
+-- | Main entry point
 main = execParser argsInfo >>= main'
   where main' (pipeline, filter, file) = (pipeline filter <$> readFile file) >>= either id id
 
@@ -30,6 +42,8 @@ main = execParser argsInfo >>= main'
                      <*> flag id plain (long "no-colour"
                                      <^> help "do not use colour when pretty printing")
                      <*> argument str (metavar "FILE")
+        
+        -- | Parses the action option
         readAction :: ReadM ((Doc -> Doc) -> Action String (IO ()))
         readAction = readerAsk >>= \x -> case x of
             "parser"      -> return $ \f -> parser >=> printer f
@@ -38,22 +52,28 @@ main = execParser argsInfo >>= main'
             "evaluator"   -> return $ evaluatorAction
             _             -> readerAbort (ShowHelpText Nothing)
 
+        -- | Default evaluator action that runs the full pipeline
         evaluatorAction :: (Doc -> Doc) -> Action String (IO ())
         evaluatorAction f = parser >=> typechecker f >=> evaluator >=> printer f
 
+        -- | Parse MinHS source into a Program
         parser :: Action String Program
         parser = either (Left . putStrLn . show) Right . parseProgram ""
 
+        -- | Type check a Program
         typechecker :: (Doc -> Doc) -> Action Program Program
         typechecker f p = case infer p of
                            Left e  -> Left . (>> putStrLn "") . putDoc . f . pretty $ e
                            Right e -> Right e
 
+        -- | Evaluate a Program
         evaluator p = Right $ evaluate p
 
+        -- | Print raw representation
         rawPrinter :: (Show a) => Action a (IO ())
         rawPrinter = Right . putStrLn . show
 
+        -- | Pretty print output
         printer :: (Pretty a) => (Doc -> Doc) -> Action a (IO ())
         printer filter = Right . (>> putStrLn "") . putDoc . filter . pretty
 

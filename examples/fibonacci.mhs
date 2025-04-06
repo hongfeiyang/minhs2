@@ -1,0 +1,10 @@
+-- Fibonacci sequence calculator in MinHS
+-- This example demonstrates recursion, if expressions, and arithmetic
+
+-- Calculate the nth Fibonacci number
+fibonacci n = if (n <= 1)
+                then n
+                else (fibonacci (n - 1)) + (fibonacci (n - 2));
+
+-- Main function to calculate the 10th Fibonacci number
+main = fibonacci 10; 
